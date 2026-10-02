@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>山野瑜伽 · 小程序三屏预览</title>
+<style>
+:root{
+  --cream:#FAF7F2; --ink:#2A2F2A; --muted:#7C857C; --line:#E5E0D8;
+  --sage:#6B8F71; --sage-soft:#EAF0EA; --amber:#D98E4A;
+  --font:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#2E2E2E;padding:30px;font-family:var(--font);color:var(--ink)}
+.board{display:flex;gap:26px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.label{color:#BDBDBD;font-size:12px;letter-spacing:.16em;text-align:center;margin-bottom:10px}
+.screen{width:375px;height:760px;background:var(--cream);border-radius:22px;overflow:hidden;position:relative}
+.status{height:34px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);background:var(--cream)}
+.nav{height:44px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:var(--cream);border-bottom:1px solid rgba(0,0,0,.04)}
+.body{padding:16px;height:calc(100% - 78px);overflow:hidden}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--amber);text-transform:uppercase}
+.h1{font-size:26px;line-height:1.3;font-weight:800;margin:6px 0 6px}
+.h2{font-size:17px;font-weight:800}
+.muted{color:var(--muted);font-size:13px;line-height:1.7}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 13px;margin-bottom:11px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tag{font-size:11px;padding:3px 9px;border-radius:99px;background:var(--sage-soft);color:var(--sage);white-space:nowrap}
+.thumb{height:130px;border-radius:14px;background:linear-gradient(150deg,#6B8F71,#A8C0AC)}
+.thumb.amber{background:linear-gradient(150deg,#D98E4A,#E9C49B);height:96px;margin-top:10px}
+.btn{height:44px;border-radius:22px;background:var(--sage);color:#fff;font-size:15px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-top:11px}
+.btn.ghost{background:#fff;color:var(--sage);border:1.5px solid var(--sage)}
+.field{border:1px solid var(--line);border-radius:9px;height:42px;display:flex;align-items:center;padding:0 12px;
+  font-size:13px;color:var(--muted);background:#fff}
+.label2{font-size:12px;color:var(--muted);margin:10px 0 6px}
+.chips{display:flex;gap:8px;margin:12px 0 10px;overflow:hidden}
+.chip{font-size:12px;padding:6px 12px;border-radius:99px;background:var(--sage-soft);color:var(--sage);white-space:nowrap}
+.chip.on{background:var(--sage);color:#fff}
+.note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- 屏 1：首页 -->
+  <div>
+    <div class="label">首页</div>
+    <div class="screen">
+      <div class="status">9:41</div>
+      <div class="nav">山野瑜伽</div>
+      <div class="body">
+        <div class="eyebrow">Mountain Yoga Studio</div>
+        <div class="h1">把这一次呼吸，<br>做完整。</div>
+        <div class="muted">小班课，一节课最多 8 人。新手有专门的入门课。</div>
+        <div class="thumb" style="margin-top:12px"></div>
+        <div class="card" style="margin-top:12px">
+          <div class="row"><div class="h2">今日课程</div><div class="tag">10-03 周五</div></div>
+          <div class="row" style="padding:10px 0;border-top:1px solid var(--line);margin-top:10px">
+            <div><div style="font-size:14px;font-weight:700">10:00 · 新手入门</div>
+              <div class="muted" style="font-size:12px">小林 · 剩 3 个位置</div></div>
+            <div class="tag">预约</div>
+          </div>
+          <div class="row" style="padding:10px 0;border-top:1px solid var(--line)">
+            <div><div style="font-size:14px;font-weight:700">19:30 · 流瑜伽</div>
+              <div class="muted" style="font-size:12px">阿May · 剩 1 个位置</div></div>
+            <div class="tag">预约</div>
+          </div>
+        </div>
+        <div class="btn">看全部课程表</div>
+        <div class="btn ghost">打电话问一下</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 屏 2：课程表 -->
+  <div>
+    <div class="label">课程表</div>
+    <div class="screen">
+      <div class="status">9:41</div>
+      <div class="nav">课程表</div>
+      <div class="body">
+        <div class="eyebrow">Schedule</div>
+        <div class="h1">课程表</div>
+        <div class="chips">
+          <div class="chip on">10-03 周五</div><div class="chip">10-04 周六</div><div class="chip">10-05 周日</div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div><div style="font-size:15px;font-weight:800">10:00 · 新手入门</div>
+              <div class="muted" style="font-size:12px">小林 · 零基础</div></div>
+            <div class="tag">3 位可约</div>
+          </div>
+          <div class="note">用墙和砖辅助，第一次来也能跟上。</div>
+          <div class="btn" style="height:38px;font-size:14px">预约这节课</div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div><div style="font-size:15px;font-weight:800">19:30 · 流瑜伽</div>
+              <div class="muted" style="font-size:12px">阿May · 有基础</div></div>
+            <div class="tag">1 位可约</div>
+          </div>
+          <div class="note">连续串联，出汗量大，建议带毛巾。</div>
+          <div class="btn" style="height:38px;font-size:14px">预约这节课</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 屏 3：预约 -->
+  <div>
+    <div class="label">预约</div>
+    <div class="screen">
+      <div class="status">9:41</div>
+      <div class="nav">预约</div>
+      <div class="body">
+        <div class="eyebrow">Booking</div>
+        <div class="h1">预约这节课</div>
+        <div class="card">
+          <div class="h2">10:00 · 新手入门</div>
+          <div class="muted" style="font-size:12px">小林 · 零基础 · 剩 3 位</div>
+          <div class="thumb amber"></div>
+        </div>
+        <div class="card">
+          <div class="label2">怎么称呼你</div><div class="field">姓名或昵称</div>
+          <div class="label2">手机号</div><div class="field">用于到店前提醒</div>
+          <div class="label2">有需要提前说一声的吗</div><div class="field">腰不好 / 第一次来</div>
+        </div>
+        <div class="note">提交后我们会打电话确认；开课前 2 小时可免费取消。</div>
+        <div class="btn">提交预约</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

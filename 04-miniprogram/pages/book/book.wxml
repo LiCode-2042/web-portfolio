@@ -1,0 +1,22 @@
+<view class="wrap">
+  <view class="eyebrow">Booking</view>
+  <view class="h1">预约这节课</view>
+
+  <view class="card">
+    <view class="h2">{{course.time}} · {{course.name}}</view>
+    <view class="muted">{{course.teacher}} · {{course.level}} · 剩 {{course.left}} 位</view>
+    <view class="thumb amber" style="height:220rpx;margin-top:20rpx"></view>
+  </view>
+
+  <view class="card">
+    <view class="label">怎么称呼你</view>
+    <input class="field" placeholder="姓名或昵称" value="{{form.name}}" bindinput="onInput" data-k="name" />
+    <view class="label">手机号</view>
+    <input class="field" type="number" placeholder="用于到店前提醒" value="{{form.phone}}" bindinput="onInput" data-k="phone" />
+    <view class="label">有需要提前说一声的吗（可不填）</view>
+    <input class="field" placeholder="比如腰不好、第一次来" value="{{form.note}}" bindinput="onInput" data-k="note" />
+  </view>
+
+  <view class="muted" style="font-size:24rpx;margin-bottom:20rpx">提交后我们会打电话确认；开课前 2 小时可以免费取消。</view>
+  <view class="btn" bindtap="submit">{{submitted ? '已提交，等你到店' : '提交预约'}}</view>
+</view>

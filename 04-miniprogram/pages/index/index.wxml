@@ -1,0 +1,24 @@
+<view class="wrap">
+  <view class="eyebrow">Mountain Yoga Studio</view>
+  <view class="h1">把这一次呼吸，<br />做完整。</view>
+  <view class="muted">小班课，一节课最多 8 人。新手有专门的入门课，不用怕跟不上。</view>
+
+  <view class="thumb" style="margin-top:28rpx"></view>
+
+  <view class="card" style="margin-top:28rpx">
+    <view class="row">
+      <view class="h2" style="margin:0">今日课程</view>
+      <view class="tag">{{today.date}}</view>
+    </view>
+    <view wx:for="{{today.list}}" wx:key="id" class="row" style="padding:22rpx 0;border-top:1rpx solid #E5E0D8">
+      <view>
+        <view style="font-size:30rpx;font-weight:700">{{item.time}} · {{item.name}}</view>
+        <view class="muted" style="font-size:24rpx">{{item.teacher}} · 剩 {{item.left}} 个位置</view>
+      </view>
+      <view class="tag" bindtap="goBook" data-id="{{item.id}}">预约</view>
+    </view>
+  </view>
+
+  <view class="btn" bindtap="goSchedule">看全部课程表</view>
+  <view class="btn ghost" style="margin-top:20rpx" bindtap="callStudio">打电话问一下</view>
+</view>

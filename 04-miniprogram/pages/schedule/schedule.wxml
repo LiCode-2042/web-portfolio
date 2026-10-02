@@ -1,0 +1,23 @@
+<view class="wrap">
+  <view class="eyebrow">Schedule</view>
+  <view class="h1">课程表</view>
+
+  <scroll-view scroll-x class="row" style="margin:24rpx 0 12rpx;gap:16rpx">
+    <view wx:for="{{days}}" wx:key="d"
+          class="tag {{item.d === active ? 'on' : ''}}"
+          style="{{item.d === active ? 'background:#6B8F71;color:#fff' : ''}}"
+          bindtap="pick" data-d="{{item.d}}">{{item.d}} {{item.w}}</view>
+  </scroll-view>
+
+  <view wx:for="{{list}}" wx:key="id" class="card">
+    <view class="row">
+      <view>
+        <view style="font-size:32rpx;font-weight:800">{{item.time}} · {{item.name}}</view>
+        <view class="muted" style="font-size:24rpx">{{item.teacher}} · {{item.level}}</view>
+      </view>
+      <view class="tag">{{item.left}} 位可约</view>
+    </view>
+    <view class="muted" style="margin-top:14rpx;font-size:24rpx">{{item.note}}</view>
+    <view class="btn" style="margin-top:22rpx;height:76rpx" bindtap="goBook" data-id="{{item.id}}">预约这节课</view>
+  </view>
+</view>

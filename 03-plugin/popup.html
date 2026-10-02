@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>取色器</title>
+<style>
+:root{
+  --bg:#141719; --panel:#1D2225; --ink:#EDF1F2; --dim:#8E9AA0;
+  --line:#2B3236; --accent:#C6F432; --font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:340px;background:var(--bg);color:var(--ink);font-family:var(--font);padding:16px}
+h1{font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:10px}
+h1 span{font-size:11px;color:var(--dim);font-weight:400}
+.row{font-size:11px;color:var(--dim);letter-spacing:.14em;margin:16px 0 8px;text-transform:uppercase}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chip{border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;background:var(--panel);text-align:left}
+.chip .c{height:44px}
+.chip .h{font-size:10px;padding:5px 6px;color:var(--dim);font-family:ui-monospace,Consolas,monospace;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip:hover .h{color:var(--accent)}
+.fonts{display:grid;gap:6px}
+.fontrow{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-size:12px;
+  display:flex;justify-content:space-between;gap:10px;cursor:pointer}
+.fontrow b{font-weight:700}
+.fontrow i{font-style:normal;color:var(--dim);font-size:11px}
+.btn{width:100%;min-height:38px;margin-top:14px;border:0;border-radius:6px;background:var(--accent);color:#0D1012;
+  font-weight:800;font-size:13px;cursor:pointer;font-family:var(--font)}
+.btn:hover{filter:brightness(1.08)}
+.toast{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);background:var(--accent);color:#0D1012;
+  font-size:12px;font-weight:700;padding:6px 12px;border-radius:99px;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1}
+.empty{font-size:12px;color:var(--dim);padding:10px 0}
+</style>
+</head>
+<body>
+  <h1>取色器 <span id="src">—</span></h1>
+  <div class="row">主色 Top 8</div>
+  <div class="sw" id="swatches"><div class="empty">点下面的按钮开始读取</div></div>
+  <div class="row">字体</div>
+  <div class="fonts" id="fonts"><div class="empty">—</div></div>
+  <button class="btn" id="go">读取当前页配色</button>
+  <div class="toast" id="toast">已复制</div>
+<script src="popup.js"></script>
+</body>
+</html>

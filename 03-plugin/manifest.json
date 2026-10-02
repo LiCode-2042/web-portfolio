@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "取色器 · Palette Picker",
+  "version": "1.0.0",
+  "description": "一键提取当前网页的主色、文字色和字体，点一下复制色值。",
+  "action": {
+    "default_title": "取色器",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "scripting", "clipboardWrite"]
+}

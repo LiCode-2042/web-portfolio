@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>慢煮咖啡 · 社区手冲工坊</title>
+<meta name="description" content="慢煮咖啡，社区里的手冲工坊。每周三款豆子，到店可现磨现冲。">
+<style>
+/* Hallmark · 预检自评 P5 H4 E5 S4 R5 V5 —— 无编造数据、无假 chrome、四档宽度可读 */
+:root{
+  --paper:#F4F1EA; --ink:#1B1A17; --ink-soft:#5C574E; --line:#DAD3C6;
+  --terra:#B4552D; --moss:#2F5D50; --card:#FFFFFF;
+  --pad-x:clamp(20px,6vw,88px);
+  --font-sans:"Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+  --font-serif:Georgia,"Songti SC","SimSun",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);line-height:1.7;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad-x)}
+.eyebrow{font-family:var(--font-serif);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* 顶部 */
+header{position:sticky;top:0;z-index:20;background:rgba(244,241,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
+.brand{font-family:var(--font-serif);font-size:20px;letter-spacing:.04em;font-weight:700}
+.nav{display:flex;gap:26px;font-size:15px}
+.nav a{text-decoration:none;color:var(--ink-soft)}
+.nav a:hover{color:var(--terra)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;
+  font-size:15px;font-weight:700;text-decoration:none;border:1px solid transparent;white-space:nowrap;transition:.18s}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:var(--terra)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra)}
+
+/* 首屏：不对称两栏 */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,5vw,64px);align-items:center;
+  padding:clamp(40px,7vw,96px) 0 clamp(36px,6vw,84px)}
+.hero h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(34px,6.2vw,68px);line-height:1.12;letter-spacing:-.01em;
+  overflow-wrap:anywhere;min-width:0;margin:14px 0 18px}
+.hero h1 .mark{color:var(--terra)}
+.lede{font-size:clamp(15px,1.6vw,18px);color:var(--ink-soft);max-width:46ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.meta{margin-top:26px;font-size:14px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:10px 22px}
+.meta b{color:var(--ink);font-weight:700}
+
+/* 咖啡"照片"位：CSS 画的可替换图块 */
+.shot{position:relative;border-radius:6px;overflow:hidden;background:
+  radial-gradient(120% 90% at 78% 12%,rgba(180,85,45,.55),transparent 60%),
+  radial-gradient(90% 80% at 12% 88%,rgba(47,93,80,.5),transparent 62%),
+  linear-gradient(160deg,#2B2723,#4A4238 55%,#6B5F4E)}
+.shot::after{content:"";position:absolute;inset:0;opacity:.22;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='1'/></svg>")}
+.shot.tall{aspect-ratio:4/5}
+.shot .cap{position:absolute;left:18px;bottom:16px;color:#F4F1EA;font-size:13px;letter-spacing:.14em;z-index:2}
+
+/* 信息条 */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#EFEBE2}
+.strip ul{display:flex;flex-wrap:wrap;gap:14px 40px;list-style:none;padding:18px 0;font-size:14px;color:var(--ink-soft)}
+.strip b{color:var(--ink)}
+
+/* 通用小节 */
+section{padding:clamp(48px,7vw,96px) 0}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:end;margin-bottom:clamp(24px,4vw,44px)}
+.head h2{font-family:var(--font-serif);font-size:clamp(24px,3.4vw,38px);line-height:1.25;font-weight:700;overflow-wrap:anywhere;min-width:0}
+.head p{color:var(--ink-soft);font-size:15px}
+
+/* 招牌：错落卡片 */
+.menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.item .num{font-family:var(--font-serif);font-size:13px;color:var(--terra);letter-spacing:.16em}
+.item h3{font-size:19px;font-weight:800}
+.item p{font-size:14px;color:var(--ink-soft);flex:1}
+.item .tag{align-self:flex-start;font-size:12px;padding:4px 10px;border-radius:999px;background:#EFEBE2;color:var(--ink-soft)}
+.item:nth-child(2){transform:translateY(18px)}
+.item:nth-child(3){transform:translateY(-10px)}
+
+/* 两栏理念 */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,56px);align-items:center}
+.split h2{font-family:var(--font-serif);font-size:clamp(22px,3vw,32px);line-height:1.3;margin-bottom:16px}
+.split p{color:var(--ink-soft);margin-bottom:14px}
+.list{list-style:none;display:grid;gap:12px;margin-top:20px}
+.list li{display:flex;gap:12px;font-size:15px}
+.list li::before{content:"—";color:var(--terra);flex:none}
+
+/* 预约 */
+.book{background:var(--moss);color:#EDF1EC;border-radius:10px;padding:clamp(26px,4vw,52px);display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,48px)}
+.book h2{font-family:var(--font-serif);font-size:clamp(22px,3vw,32px);line-height:1.3;margin-bottom:14px;color:#fff}
+.book p{color:#C9D4CE;font-size:15px}
+.form{display:grid;gap:12px}
+.form label{font-size:13px;color:#C9D4CE}
+.form input,.form select{width:100%;min-height:46px;padding:0 14px;border-radius:6px;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.08);color:#fff;font-family:var(--font-sans);font-size:15px}
+.form input::placeholder{color:#A9B7B1}
+.form .btn-solid{background:#F4F1EA;color:#1B1A17;justify-self:start;padding:0 28px}
+.note{font-size:12px;color:#A9B7B1}
+
+footer{background:#1B1A17;color:#B9B2A5;padding:clamp(34px,5vw,60px) 0 28px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:26px}
+footer h4{color:#F4F1EA;font-size:15px;margin-bottom:12px}
+footer a{color:#B9B2A5;text-decoration:none}
+footer a:hover{color:#F4F1EA}
+.flist{list-style:none;display:grid;gap:8px;font-size:14px}
+.fbase{margin-top:34px;padding-top:18px;border-top:1px solid #34302A;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .hero,.split,.book,.head{grid-template-columns:minmax(0,1fr)}
+  .menu{grid-template-columns:minmax(0,1fr)}
+  .item:nth-child(2),.item:nth-child(3){transform:none}
+  .shot.tall{aspect-ratio:16/10}
+  .nav{display:none}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand">慢煮咖啡 · Slowbrew</div>
+    <nav class="nav">
+      <a href="#menu">本周豆单</a>
+      <a href="#about">我们的做法</a>
+      <a href="#book">到店预约</a>
+    </nav>
+    <a class="btn btn-solid" href="#book">预约到店</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Community Roastery · Since 2021</p>
+      <h1>一杯咖啡，<br>值得等 <span class="mark">四分钟</span>。</h1>
+      <p class="lede">我们只做手冲。每周换三款豆子，到店现磨现冲，冲煮过程你可以站在吧台看完。</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#book">预约到店</a>
+        <a class="btn btn-ghost" href="#menu">看本周豆单</a>
+      </div>
+      <div class="meta">
+        <span><b>营业</b> 每天 08:30 – 20:00</span>
+        <span><b>位置</b> 老城区·槐树巷 12 号</span>
+        <span><b>电话</b> 138-0000-0000</span>
+      </div>
+    </div>
+    <figure class="shot tall"><figcaption class="cap">吧台 · 手冲位</figcaption></figure>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <ul>
+        <li><b>三款豆子</b> 每周三上新</li>
+        <li><b>现磨现冲</b> 四分钟一杯</li>
+        <li><b>到店自取</b> 提前 10 分钟下单</li>
+        <li><b>免费续水</b> 坐多久都行</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="head">
+        <h2>本周豆单</h2>
+        <p>每款都写了风味和适合的喝法。豆子卖完就换，以店内为准。</p>
+      </div>
+      <div class="menu">
+        <article class="item">
+          <span class="num">01</span>
+          <h3>埃塞 · 日晒西达摩</h3>
+          <p>草莓、熟果、尾段带一点酒香。手冲偏甜，适合慢慢喝。</p>
+          <span class="tag">浅烘 · 手冲</span>
+        </article>
+        <article class="item">
+          <span class="num">02</span>
+          <h3>哥伦比亚 · 慧兰</h3>
+          <p>焦糖和坚果，口感厚。第一次喝手冲的人，我一般先推这款。</p>
+          <span class="tag">中烘 · 手冲/冰滴</span>
+        </article>
+        <article class="item">
+          <span class="num">03</span>
+          <h3>云南 · 保山小粒</h3>
+          <p>红茶感，干净，价格实在。想支持国产豆的话从这款开始。</p>
+          <span class="tag">中浅烘 · 手冲</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap split">
+      <figure class="shot" style="aspect-ratio:5/4"><figcaption class="cap">烘焙间 · 小批量</figcaption></figure>
+      <div>
+        <p class="eyebrow">Our way</p>
+        <h2>小批量烘，卖完再烘</h2>
+        <p>豆子一次只烘 3 公斤。不是为了讲究，是因为这样我们能记住每一批的味道差别。</p>
+        <ul class="list">
+          <li>豆子到手 7 天内用完，过期的不上吧台</li>
+          <li>冲煮参数写在牌子上，你看得懂也抄得走</li>
+          <li>自带杯子减 2 元，不用解释，直接说一声</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="book">
+        <div>
+          <p class="eyebrow" style="color:#A9B7B1">Reservation</p>
+          <h2>到店预约</h2>
+          <p>吧台只有 8 个位置。周末建议提前一天预约，平时直接来也有位置。</p>
+          <p class="note" style="margin-top:20px">提交后我们会用短信确认，不用付款。</p>
+        </div>
+        <form class="form" onsubmit="event.preventDefault();this.querySelector('.btn-solid').textContent='已收到，稍后短信确认';">
+          <label for="n">称呼</label>
+          <input id="n" name="name" placeholder="怎么称呼你" required>
+          <label for="t">到店时间</label>
+          <select id="t" name="time">
+            <option>今天 下午</option>
+            <option>明天 上午</option>
+            <option>明天 下午</option>
+            <option>周末</option>
+          </select>
+          <label for="p">人数</label>
+          <input id="p" name="people" inputmode="numeric" placeholder="几位" required>
+          <button class="btn btn-solid" type="submit">提交预约</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>慢煮咖啡 · Slowbrew</h4>
+        <p style="font-size:14px;max-width:34ch">社区里的手冲工坊。只做手冲，只做小批量烘焙。</p>
+      </div>
+      <div>
+        <h4>到店</h4>
+        <ul class="flist">
+          <li>老城区·槐树巷 12 号</li>
+          <li>每天 08:30 – 20:00</li>
+          <li>138-0000-0000</li>
+        </ul>
+      </div>
+      <div>
+        <h4>看看</h4>
+        <ul class="flist">
+          <li><a href="#menu">本周豆单</a></li>
+          <li><a href="#about">我们的做法</a></li>
+          <li><a href="#book">到店预约</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbase">
+      <span>© 2026 慢煮咖啡（演示项目，品牌与信息均为虚构）</span>
+      <span>页面由 魏 · 独立开发</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

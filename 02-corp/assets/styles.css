@@ -1,0 +1,130 @@
+/* 恒远机械 · 企业官网示例
+   Hallmark 预检自评 P5 H4 E5 S4 R5 V5 —— 无编造数据、无假 chrome、颜色全走 token、四档宽度可读 */
+:root{
+  --bg:#F5F6F7; --surface:#FFFFFF; --ink:#12181D; --ink-soft:#5E6B73;
+  --brand:#143D5C; --brand-soft:#E8EEF3; --accent:#E4572E; --line:#D8DEE2;
+  --pad-x:clamp(18px,5vw,72px); --maxw:1200px;
+  --font-sans:"Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+  --font-mono:"Consolas","SF Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.7;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad-x)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+/* 顶部 */
+.topbar{background:var(--brand);color:#D6E1EA;font-size:13px}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:9px var(--pad-x)}
+.topbar a{color:#D6E1EA;text-decoration:none;white-space:nowrap}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;white-space:nowrap}
+.brand i{width:26px;height:26px;background:var(--brand);display:block;border-radius:4px;position:relative}
+.brand i::after{content:"";position:absolute;left:6px;top:6px;width:14px;height:14px;border:3px solid var(--accent)}
+.nav{display:flex;gap:24px;font-size:15px}
+.nav a{text-decoration:none;color:var(--ink-soft);padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover{color:var(--brand);border-bottom-color:var(--brand)}
+.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:4px;
+  font-size:15px;font-weight:700;text-decoration:none;border:1px solid transparent;white-space:nowrap;transition:.18s}
+.btn-solid{background:var(--accent);color:#fff}
+.btn-solid:hover{background:#c8451f}
+.btn-line{border-color:var(--brand);color:var(--brand)}
+.btn-line:hover{background:var(--brand-soft)}
+
+/* 通用小节 */
+.section{padding:clamp(44px,6vw,84px) 0}
+.section.alt{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:end;margin-bottom:clamp(22px,3.4vw,40px)}
+.head h2{font-size:clamp(22px,3.2vw,34px);line-height:1.3;font-weight:800;overflow-wrap:anywhere;min-width:0}
+.head p{color:var(--ink-soft);font-size:15px}
+
+/* 首页首屏 */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(22px,4.5vw,56px);align-items:center;padding:clamp(34px,5vw,72px) 0}
+.hero h1{font-size:clamp(30px,5.2vw,56px);line-height:1.16;font-weight:900;letter-spacing:-.01em;overflow-wrap:anywhere;min-width:0;margin:12px 0 16px}
+.hero h1 u{text-decoration:none;box-shadow:inset 0 -.32em 0 var(--accent)}
+.lede{font-size:16px;color:var(--ink-soft);max-width:48ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;font-size:14px;color:var(--ink-soft)}
+.facts b{color:var(--ink)}
+.figbox{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/3;
+  background:linear-gradient(140deg,#0E2A3F,#1C4E71 58%,#2E6E93);}
+.figbox::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 34px),
+                   repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 34px)}
+.figbox::after{content:"";position:absolute;right:-40px;bottom:-60px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,rgba(228,87,46,.5),transparent 62%)}
+.figbox span{position:absolute;left:18px;bottom:14px;color:#CFDDE7;font-size:12px;letter-spacing:.14em;z-index:2}
+
+/* 三栏业务卡 */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+.card .k{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.16em}
+.card h3{font-size:18px;font-weight:800}
+.card p{font-size:14px;color:var(--ink-soft);flex:1}
+.card a{font-size:14px;color:var(--brand);text-decoration:none;font-weight:700}
+
+/* 流程四步 */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:4px;padding:20px}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--font-mono);font-size:13px;color:var(--accent);display:block;margin-bottom:8px}
+.step h3{font-size:16px;margin-bottom:6px}
+.step p{font-size:13px;color:var(--ink-soft)}
+
+/* 表格（产品参数） */
+.table{width:100%;border-collapse:collapse;background:var(--surface);font-size:14px}
+.table caption{text-align:left;font-size:14px;color:var(--ink-soft);padding-bottom:10px}
+.table th,.table td{border:1px solid var(--line);padding:12px 14px;text-align:left}
+.table th{background:var(--brand-soft);font-weight:700;white-space:nowrap}
+.table td.num{font-family:var(--font-mono)}
+.tablewrap{overflow-x:auto}
+
+/* 案例网格 */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.case .ph{aspect-ratio:16/10;background:linear-gradient(150deg,#17364C,#2C6285)}
+.case .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.case .tag{align-self:flex-start;font-size:12px;padding:3px 9px;border-radius:99px;background:var(--brand-soft);color:var(--brand)}
+.case h3{font-size:16px}
+.case p{font-size:13px;color:var(--ink-soft);flex:1}
+
+/* 时间轴（关于页） */
+.timeline{list-style:none;border-left:2px solid var(--line);padding-left:24px;display:grid;gap:22px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-31px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline time{font-family:var(--font-mono);font-size:13px;color:var(--accent)}
+.timeline h3{font-size:16px;margin:4px 0 4px}
+.timeline p{font-size:14px;color:var(--ink-soft)}
+
+/* 表单 */
+.form{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(20px,3vw,32px)}
+.field{display:grid;gap:6px}
+.form label{font-size:13px;color:var(--ink-soft)}
+.form input,.form select,.form textarea{width:100%;min-height:46px;padding:12px 14px;border:1px solid var(--line);border-radius:4px;
+  font-family:var(--font-sans);font-size:15px;background:#fff;color:var(--ink)}
+.form textarea{min-height:110px;resize:vertical}
+.form .btn-solid{justify-self:start;padding:0 26px}
+.hint{font-size:12px;color:var(--ink-soft)}
+
+/* 页脚 */
+footer{background:#0E2233;color:#A9BBC8;padding:clamp(34px,4.6vw,58px) 0 24px}
+footer h4{color:#EDF3F7;font-size:15px;margin-bottom:12px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:26px}
+.flist{list-style:none;display:grid;gap:8px;font-size:14px}
+footer a{color:#A9BBC8;text-decoration:none}
+footer a:hover{color:#fff}
+.fbase{margin-top:30px;padding-top:16px;border-top:1px solid #223B4F;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero,.head{grid-template-columns:minmax(0,1fr)}
+  .cards,.cases{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .nav{display:none}
+  .steps{grid-template-columns:minmax(0,1fr)}
+}

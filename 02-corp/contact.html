@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>联系我们 · 恒远机械</title>
+<meta name="description" content="预约现场勘测、索取报价、报修。工作日 24 小时内回电。">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <span>服务范围：车间除尘 · 废气处理 · 设备维保</span>
+  <span><a href="tel:400-000-0000">400-000-0000</a> ｜ <a href="contact.html">索取报价</a></span>
+</div></div>
+
+<header><div class="wrap bar">
+  <a class="brand" href="index.html"><i></i>恒远机械</a>
+  <nav class="nav">
+    <a href="index.html">首页</a>
+    <a href="products.html">产品与参数</a>
+    <a href="cases.html">项目案例</a>
+    <a href="about.html">关于恒远</a>
+    <a href="contact.html" aria-current="page">联系我们</a>
+  </nav>
+  <a class="btn btn-solid" href="contact.html">索取报价</a>
+</div></header>
+
+<main>
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <h2>联系我们</h2>
+        <p>把车间情况写清楚，我们回电话前会先做功课。</p>
+      </div>
+      <div class="hero" style="padding-top:0;align-items:start">
+        <form class="form" onsubmit="event.preventDefault();this.querySelector('.btn-solid').textContent='已收到，我们会按你留的方式回电';">
+          <div class="field">
+            <label for="c">称呼</label>
+            <input id="c" name="name" placeholder="怎么称呼你" required>
+          </div>
+          <div class="field">
+            <label for="p">电话</label>
+            <input id="p" name="phone" inputmode="tel" placeholder="方便回电的号码" required>
+          </div>
+          <div class="field">
+            <label for="n">公司 / 车间</label>
+            <input id="n" name="company" placeholder="厂名或车间名">
+          </div>
+          <div class="field">
+            <label for="t">想解决的问题</label>
+            <select id="t" name="type">
+              <option>车间粉尘（打磨/切割/投料）</option>
+              <option>焊接烟尘</option>
+              <option>喷涂 / 烘干废气</option>
+              <option>老系统维保或改造</option>
+              <option>其他</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d">情况描述</label>
+            <textarea id="d" name="detail" placeholder="几个工位、粉尘大概什么样子、车间多大、能不能布管道"></textarea>
+          </div>
+          <button class="btn btn-solid" type="submit">提交，等回电</button>
+          <p class="hint">演示页面：表单不会真的发送。正式交付时接客户自己的表单或后端接口。</p>
+        </form>
+
+        <div>
+          <div class="cards" style="grid-template-columns:minmax(0,1fr)">
+            <article class="card">
+              <span class="k">电话</span>
+              <h3>400-000-0000</h3>
+              <p>周一至周六 08:30–18:00。急修可以直接打，说清车间位置。</p>
+            </article>
+            <article class="card">
+              <span class="k">地址</span>
+              <h3>示例地址 · 城北工业园</h3>
+              <p>来之前打个电话，我们好安排人对接。（正式交付时这里换成地图嵌入）</p>
+            </article>
+            <article class="card">
+              <span class="k">勘测</span>
+              <h3>省内上门勘测</h3>
+              <p>勘测和方案不收费。外省项目先电话沟通，再定是否上门。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head">
+        <h2>常被问到的几句</h2>
+        <p>先答在这里，省得来回问。</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="k">Q1</span><h3>能保证验收通过吗</h3><p>不承诺。我们按标准做方案并把风量、工艺算清楚，验收由具备资质的机构出结论。</p></article>
+        <article class="card"><span class="k">Q2</span><h3>多久能出方案</h3><p>勘测完一般 3–5 个工作日，复杂工况会更久，会提前跟你说。</p></article>
+        <article class="card"><span class="k">Q3</span><h3>别家做的系统你们接吗</h3><p>接。先做一次系统检查，出问题清单和改造建议，再决定修还是换。</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><h4>恒远机械</h4><p style="font-size:14px;max-width:36ch">车间除尘与废气处理设备，提供勘测、设计、安装、维保。</p></div>
+    <div><h4>业务</h4><ul class="flist">
+      <li><a href="products.html">除尘设备</a></li><li><a href="products.html">废气处理</a></li><li><a href="contact.html">设备维保</a></li>
+    </ul></div>
+    <div><h4>联系</h4><ul class="flist"><li>400-000-0000</li><li>周一至周六 08:30–18:00</li><li>示例地址 · 城北工业园</li></ul></div>
+  </div>
+  <div class="fbase"><span>© 2026 恒远机械（演示项目，公司与信息均为虚构）</span><span>页面由 魏 · 独立开发</span></div>
+</div></footer>
+
+</body>
+</html>

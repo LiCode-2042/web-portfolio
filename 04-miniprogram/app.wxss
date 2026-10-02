@@ -1,0 +1,22 @@
+/* 山野瑜伽 · 全局样式（配色改这里就行） */
+page{
+  --cream:#FAF7F2; --ink:#2A2F2A; --muted:#7C857C; --line:#E5E0D8;
+  --sage:#6B8F71; --sage-soft:#EAF0EA; --amber:#D98E4A;
+  background:var(--cream); color:var(--ink);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+.wrap{padding:24rpx 32rpx 48rpx}
+.card{background:#fff;border:1rpx solid var(--line);border-radius:20rpx;padding:28rpx 26rpx;margin-bottom:22rpx}
+.eyebrow{font-size:22rpx;letter-spacing:4rpx;color:var(--amber);text-transform:uppercase}
+.h1{font-size:52rpx;line-height:1.3;font-weight:800;margin:12rpx 0 10rpx}
+.h2{font-size:34rpx;font-weight:800;margin-bottom:14rpx}
+.muted{color:var(--muted);font-size:26rpx;line-height:1.7}
+.btn{display:flex;align-items:center;justify-content:center;height:88rpx;border-radius:44rpx;
+  background:var(--sage);color:#fff;font-size:30rpx;font-weight:700}
+.btn.ghost{background:#fff;color:var(--sage);border:2rpx solid var(--sage)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16rpx}
+.tag{font-size:22rpx;padding:6rpx 16rpx;border-radius:99rpx;background:var(--sage-soft);color:var(--sage)}
+.thumb{height:300rpx;border-radius:20rpx;background:linear-gradient(150deg,#6B8F71,#A8C0AC)}
+.thumb.amber{background:linear-gradient(150deg,#D98E4A,#E9C49B)}
+.field{border:1rpx solid var(--line);border-radius:14rpx;height:88rpx;padding:0 24rpx;background:#fff;width:100%;font-size:28rpx}
+.label{font-size:26rpx;color:var(--muted);margin:18rpx 0 10rpx}

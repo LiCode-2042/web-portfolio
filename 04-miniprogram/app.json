@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/schedule/schedule",
+    "pages/book/book"
+  ],
+  "window": {
+    "navigationBarTitleText": "山野瑜伽",
+    "navigationBarBackgroundColor": "#FAF7F2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FAF7F2"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
