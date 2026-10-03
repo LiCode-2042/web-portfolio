@@ -34,10 +34,33 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
 .item .go{font-size:14px;font-weight:700;color:var(--neon);white-space:nowrap}
 .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;
   display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.block{margin-top:54px;padding-top:32px;border-top:1px solid var(--line)}
+.h2{font-size:clamp(20px,3vw,26px);font-weight:800;margin-bottom:10px}
+.note{color:var(--dim);font-size:14px;margin-bottom:16px}
+.note.small{font-size:12px;margin:16px 0 0}
+.price{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.price th,.price td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.price th{color:var(--dim);font-weight:700;font-size:13px;letter-spacing:.04em;background:rgba(255,255,255,.03)}
+.price tr:last-child td{border-bottom:0}
+.price .p{color:var(--neon);font-weight:800;white-space:nowrap}
+.steps{list-style:none;counter-reset:s;display:grid;gap:12px}
+.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:16px 18px 16px 56px;position:relative}
+.steps li::before{content:"0" counter(s);position:absolute;left:18px;top:17px;color:var(--neon);font-weight:800;font-size:13px}
+.steps b{display:block;font-size:16px;margin-bottom:4px}
+.steps span{color:var(--dim);font-size:14px;line-height:1.6}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.lk{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;padding:18px 20px;text-decoration:none;transition:.18s}
+.lk:hover{border-color:var(--neon);transform:translateY(-2px)}
+.lk b{font-size:15px}
+.lk span{color:var(--neon);font-size:13px;white-space:nowrap}
 @media (max-width:640px){
   .item{grid-template-columns:minmax(0,1fr);gap:8px}
   .item .n{font-size:14px;letter-spacing:.16em}
   .item .go{justify-self:start}
+  .links{grid-template-columns:minmax(0,1fr)}
+  .price th:nth-child(3),.price td:nth-child(3){display:none}
 }
 </style>
 </head>
@@ -75,6 +98,43 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
     <span>需要类似的网站 / 小程序，可以找我聊需求</span>
     <span>演示内容均为虚构</span>
   </div>
+
+  <section class="block">
+    <h2 class="h2">报价参考</h2>
+    <p class="note">先看需求再报价，下面是最常见的三档。报价逐项列，没有隐藏费用。</p>
+    <table class="price">
+      <thead><tr><th>交付物</th><th>价格</th><th>包含什么</th></tr></thead>
+      <tbody>
+        <tr><td>单页官网</td><td class="p">¥399 起</td><td>8 个模块以内、手机适配、改 2 次</td></tr>
+        <tr><td>企业官网（多页）</td><td class="p">¥1280 起</td><td>5 页以内、产品/案例/联系页、表单对接、改 3 次</td></tr>
+        <tr><td>微信小程序</td><td class="p">¥2480 起</td><td>3–5 个页面、表单/预约、手机适配</td></tr>
+        <tr><td>加购项</td><td class="p">另议</td><td>多语言、后台可编辑、数据接口、长期维护</td></tr>
+      </tbody>
+    </table>
+    <p class="note">报价含源码，交付后 7 天内免费答疑；上线（域名/托管/备案）我可以远程指导。</p>
+  </section>
+
+  <section class="block">
+    <h2 class="h2">怎么合作</h2>
+    <ol class="steps">
+      <li><b>聊需求</b><span>把参考站和想要的功能发我，免费。不清楚的地方我会问。</span></li>
+      <li><b>报价 + 排期</b><span>逐项列清单和价格，告诉你大概几天。不满意可以直接说不做。</span></li>
+      <li><b>定金开工</b><span>通常先付一半。做的过程中能看到进度，不是等到最后才知道。</span></li>
+      <li><b>交付 + 尾款</b><span>源码给你，附改动说明；尾款结清后 7 天内答疑。</span></li>
+    </ol>
+  </section>
+
+  <section class="block contact">
+    <h2 class="h2">想聊需求</h2>
+    <p class="note">我在小红书上更新做图和做站的过程，私信我能最快找到我。</p>
+    <div class="links">
+      <a class="lk" href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">
+        <b>小红书 · @Goildden.Tea</b><span>私信聊需求 →</span></a>
+      <a class="lk" href="https://github.com/LiCode-2042/web-portfolio" target="_blank" rel="noopener">
+        <b>GitHub · 这个作品集</b><span>看源码 →</span></a>
+    </div>
+    <p class="note small">演示站里的品牌、电话、地址都是虚构的，仅用于展示页面结构。</p>
+  </section>
 </div>
 </body>
 </html>
