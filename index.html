@@ -21,12 +21,16 @@ a{color:inherit}
 .glow{position:fixed;right:-260px;top:-260px;width:720px;height:720px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 42% 42%,rgba(198,244,50,.14),transparent 64%)}
 .eyebrow{font-size:12px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase}
+.badge{display:inline-block;margin-left:10px;padding:3px 10px;border-radius:999px;
+  background:var(--neon);color:#0b0f16;font-size:11px;font-weight:700;letter-spacing:.04em}
 h1{font-size:clamp(28px,5vw,46px);line-height:1.2;font-weight:900;letter-spacing:-.01em;margin:12px 0 14px;overflow-wrap:anywhere}
 h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6px}
 .lede{color:var(--dim);font-size:16px;max-width:52ch}
 .list{display:grid;gap:14px;margin:38px 0 10px}
-.item{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;
+.item{display:grid;grid-template-columns:170px 56px minmax(0,1fr) auto;gap:16px;align-items:center;
   background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;text-decoration:none;transition:.18s}
+.item .thumb{width:170px;height:118px;border-radius:8px;overflow:hidden;background:#0e1420;border:1px solid var(--line)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .item:hover{border-color:var(--neon);transform:translateY(-2px)}
 .item .n{font-size:20px;font-weight:900;color:var(--neon)}
 .item h2{font-size:19px;font-weight:800;margin-bottom:4px}
@@ -57,6 +61,7 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
 .lk span{color:var(--neon);font-size:13px;white-space:nowrap}
 @media (max-width:640px){
   .item{grid-template-columns:minmax(0,1fr);gap:8px}
+  .item .thumb{width:100%;height:170px}
   .item .n{font-size:14px;letter-spacing:.16em}
   .item .go{justify-self:start}
   .links{grid-template-columns:minmax(0,1fr)}
@@ -67,27 +72,31 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
 <body>
 <div class="grid-bg"></div><div class="glow"></div>
 <div class="wrap">
-  <p class="eyebrow">Web &amp; Mini Program</p>
+  <p class="eyebrow">Web &amp; Mini Program <span class="badge">接单中</span></p>
   <h1>四个作品，<br>四种<span class="hl">交付物</span></h1>
   <p class="lede">都是演示项目：品牌与内容均为虚构，用来展示页面结构、响应式和技术实现。点进去可以真操作。</p>
 
   <div class="list">
     <a class="item" href="01-cafe/">
+      <div class="thumb"><img src="assets/thumbs/01-cafe.webp" alt="门店单页官网预览" loading="lazy"></div>
       <div class="n">01</div>
       <div><h2>门店单页官网</h2><p>咖啡店 · 单文件静态页 · 表单与门店信息</p></div>
       <div class="go">打开 →</div>
     </a>
     <a class="item" href="02-corp/">
+      <div class="thumb"><img src="assets/thumbs/02-corp.webp" alt="企业官网预览" loading="lazy"></div>
       <div class="n">02</div>
       <div><h2>企业官网（5 页）</h2><p>工业设备 · 多页面站点 · 参数表格与案例页</p></div>
       <div class="go">打开 →</div>
     </a>
     <a class="item" href="03-plugin/preview.png">
+      <div class="thumb"><img src="assets/thumbs/03-plugin.webp" alt="浏览器插件界面" loading="lazy"></div>
       <div class="n">03</div>
       <div><h2>浏览器插件（取色器）</h2><p>Chrome 扩展 · 读取网页配色与字体 · 点这里看界面</p></div>
       <div class="go">看界面 →</div>
     </a>
     <a class="item" href="04-miniprogram/preview.png">
+      <div class="thumb"><img src="assets/thumbs/04-miniprogram.webp" alt="微信小程序三屏" loading="lazy"></div>
       <div class="n">04</div>
       <div><h2>微信小程序（课预约）</h2><p>瑜伽馆 · 3 个页面 · 课程表与预约表单</p></div>
       <div class="go">看三屏 →</div>
@@ -95,7 +104,7 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
   </div>
 
   <div class="foot">
-    <span>需要类似的网站 / 小程序，可以找我聊需求</span>
+    <span>需要类似的网站 / 小程序，<a href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">点我小红书主页私信</a>聊需求</span>
     <span>演示内容均为虚构</span>
   </div>
 
