@@ -20,6 +20,11 @@ a{color:inherit}
                    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 72px)}
 .glow{position:fixed;right:-260px;top:-260px;width:720px;height:720px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 42% 42%,rgba(198,244,50,.14),transparent 64%)}
+/* 鼠标追视：跟着光标走的柔光。触屏和「减少动态效果」下自动关闭 */
+.cursor-glow{position:fixed;left:0;top:0;width:500px;height:500px;margin:-250px 0 0 -250px;border-radius:50%;
+  pointer-events:none;opacity:0;transition:opacity .5s ease;mix-blend-mode:screen;will-change:transform;
+  background:radial-gradient(circle at 50% 50%,rgba(198,244,50,.55),rgba(198,244,50,.16) 34%,transparent 60%)}
+.cursor-glow.on{opacity:1}
 .eyebrow{font-size:12px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase}
 .badge{display:inline-block;margin-left:10px;padding:3px 10px;border-radius:999px;
   background:var(--neon);color:#0b0f16;font-size:11px;font-weight:700;letter-spacing:.04em}
@@ -70,7 +75,7 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
 </style>
 </head>
 <body>
-<div class="grid-bg"></div><div class="glow"></div>
+<div class="grid-bg"></div><div class="glow"></div><div class="cursor-glow" id="cursorGlow"></div>
 <div class="wrap">
   <p class="eyebrow">Web &amp; Mini Program <span class="badge">接单中</span></p>
   <h1>四个作品，<br>四种<span class="hl">交付物</span></h1>
@@ -145,5 +150,42 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
     <p class="note small">演示站里的品牌、电话、地址都是虚构的，仅用于展示页面结构。</p>
   </section>
 </div>
+
+<script>
+// 鼠标追视：光晕用缓动跟着指针走。触屏设备、开了「减少动态效果」的都不启用。
+(function () {
+  var el = document.getElementById('cursorGlow');
+  if (!el) return;
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var calm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (!fine || calm) return;
+
+  var tx = window.innerWidth / 2, ty = window.innerHeight * 0.35; // 目标点
+  var cx = tx, cy = ty;                                          // 当前点（缓动后）
+  var raf = 0;
+
+  function tick() {
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    el.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+    if (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      raf = 0;
+    }
+  }
+
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    tx = e.clientX;
+    ty = e.clientY;
+    el.classList.add('on');
+    if (!raf) raf = requestAnimationFrame(tick);
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', function () { el.classList.remove('on'); });
+  window.addEventListener('blur', function () { el.classList.remove('on'); });
+})();
+</script>
 </body>
 </html>
