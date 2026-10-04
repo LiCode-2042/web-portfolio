@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>案例拆解 01 · 门店单页官网（咖啡店） | 魏 · 作品集</title>
+<meta name="description" content="一个 ¥399 的单页官网是怎么做出来的：客户要什么、设计上做了哪三个决定、关键代码、以及最后交付了什么。">
+<style>
+:root{
+  --bg:#0D1012; --panel:#171B1E; --ink:#F4F7F1; --dim:#9AA3A8; --line:rgba(255,255,255,.12);
+  --neon:#C6F432; --terra:#C4713F; --moss:#3E7F6C;
+  --font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:clamp(24px,4vw,56px) clamp(18px,5vw,40px)}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--dim);text-decoration:none}
+.back:hover{color:var(--neon)}
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase;margin-top:26px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.25;font-weight:900;margin:10px 0 14px;overflow-wrap:anywhere}
+.lede{color:var(--dim);font-size:16px;max-width:56ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-size:14px;color:var(--dim)}
+.facts b{color:var(--ink)}
+section{margin-top:clamp(44px,6vw,72px);padding-top:clamp(26px,4vw,40px);border-top:1px solid var(--line)}
+h2{font-size:clamp(20px,3vw,26px);font-weight:800;margin-bottom:8px}
+.num{color:var(--neon);font-weight:900;margin-right:8px}
+p{color:var(--dim);font-size:15px}
+p+p{margin-top:12px}
+strong{color:var(--ink);font-weight:700}
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-size:13px;font-weight:700;background:rgba(255,255,255,.03)}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ink)}
+.cards{display:grid;gap:14px;margin-top:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.card b{display:block;font-size:16px;margin-bottom:6px}
+.card p{font-size:14px}
+.card .why{margin-top:8px;font-size:13px;color:var(--dim)}
+.card .why::before{content:"为什么不那样做：";color:var(--neon)}
+pre{background:#111417;border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;margin-top:14px}
+code{font-family:var(--mono);font-size:12.5px;line-height:1.65;color:#DCE3DA;white-space:pre}
+.cap{font-size:13px;color:var(--dim);margin-top:8px}
+figure{margin-top:18px}
+figure img{display:block}
+.frame{height:clamp(320px,46vw,520px);overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#0E1420}
+.frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.two{display:grid;grid-template-columns:1.9fr .85fr;gap:16px;align-items:start}
+.tag{display:inline-block;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:0 8px 8px 0}
+.cta{margin-top:clamp(44px,6vw,72px);padding-top:26px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:999px;font-size:15px;
+  font-weight:700;text-decoration:none;background:var(--neon);color:#0D1012}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{opacity:.88}
+@media (max-width:640px){
+  .two{grid-template-columns:minmax(0,1fr)}
+  th:nth-child(2),td:nth-child(2){display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← 返回作品集</a>
+
+  <p class="eyebrow">Case Study 01 · 门店单页官网</p>
+  <h1>一家咖啡店的单页官网，<br>是怎么做出来的</h1>
+  <p class="lede">客户的要求只有三句话：一页就够、手机上要好看、客人能预约。这一页把从需求到上线的过程拆开给你看。</p>
+  <div class="facts">
+    <span><b>档位</b> 单页官网 · ¥399 起</span>
+    <span><b>交付</b> 一个 HTML 文件</span>
+    <span><b>适配</b> 320–1440 都排过</span>
+    <span><b>依赖</b> 无数据库、无外部库</span>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>客户要什么</h2>
+    <p>客户不会说"我要一个响应式落地页"。他说的是一句句大白话，<strong>我的活是把这些话翻译成能做的需求</strong>：</p>
+    <table>
+      <thead><tr><th>客户原话</th><th>我理解成</th><th>落到页面上</th></tr></thead>
+      <tbody>
+        <tr><td>"我就一页，别搞复杂"</td><td>单页 + 锚点跳转</td><td>顶部固定导航，三个锚点</td></tr>
+        <tr><td>"手机上要好看"</td><td>移动优先，不是缩小版</td><td>860px 断点，手机端一列到底</td></tr>
+        <tr><td>"客人要能留电话预约"</td><td>要一个转化区</td><td>墨绿反白区块 + 三步表单</td></tr>
+        <tr><td>"我不会维护，别让我学东西"</td><td>零依赖的单文件</td><td>一个 HTML，改字用记事本就行</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>设计上做了三个决定</h2>
+    <p>单页最容易做成"模板套娃"。这三个决定是为了让它看起来<strong>不像模板</strong>：</p>
+    <div class="cards">
+      <div class="card">
+        <b>配色只留四个变量</b>
+        <p>米白纸底、近黑正文、砖红强调、墨绿区块。四个值集中在 <code>:root</code> 里。</p>
+        <p class="why">堆一堆相近的灰，页面上每个元素都在抢注意力，反而没有一个重点。</p>
+      </div>
+      <div class="card">
+        <b>豆单三张卡故意错开高度</b>
+        <p>第 2 张下移 18px，第 3 张上移 10px，形成一点节奏。</p>
+        <p class="why">三张卡片一样高、一样宽、一样的留白，一眼就能看出是模板。</p>
+      </div>
+      <div class="card">
+        <b>预约区用墨绿反白</b>
+        <p>整页都是米白，只有预约那一段是深色。</p>
+        <p class="why">如果每段都是白底，访客滚到底也不会特别注意"这里能预约"。</p>
+      </div>
+      <div class="card">
+        <b>照片位先用 CSS 画出来</b>
+        <p>客户还没给实拍图，就用渐变 + 噪点先顶上，一点带宽都不占。</p>
+        <p class="why">为占位放一张网上的图，既有版权风险，又拖慢打开速度。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>关键代码</h2>
+    <p>挑三段真正影响"好不好用"的写法出来。</p>
+
+    <p><strong>① 换配色只改 4 行</strong> —— 客户以后想换颜色，不用碰其它任何地方：</p>
+<pre><code>:root{
+  --paper:#F4F1EA;  /* 纸底 */
+  --ink:#1B1A17;    /* 正文 */
+  --terra:#B4552D;  /* 强调色 */
+  --moss:#2F5D50;   /* 深色区块 */
+}</code></pre>
+
+    <p><strong>② 错落卡片要和手机端复位成对写</strong> —— 只写一半，手机上会溢出：</p>
+<pre><code>.item:nth-child(2){transform:translateY(18px)}
+.item:nth-child(3){transform:translateY(-10px)}
+
+@media (max-width:860px){
+  .item:nth-child(2),.item:nth-child(3){transform:none}
+}</code></pre>
+
+    <p><strong>③ 一行 clamp 顶掉三档媒体查询</strong> —— 字号和留白都跟着屏幕走：</p>
+<pre><code>.hero h1{font-size:clamp(34px,6.2vw,68px)}
+.wrap{padding:0 clamp(20px,6vw,88px)}</code></pre>
+
+    <p><strong>④ 照片位是纯 CSS 的，零请求</strong> —— 客户给了实拍图，换成 <code>background-image</code> 就行：</p>
+<pre><code>.shot{background:
+  radial-gradient(120% 90% at 78% 12%,rgba(180,85,45,.55),transparent 60%),
+  radial-gradient(90% 80% at 12% 88%,rgba(47,93,80,.5),transparent 62%),
+  linear-gradient(160deg,#2B2723,#4A4238 55%,#6B5F4E)}
+
+.shot::after{content:"";position:absolute;inset:0;opacity:.22;
+  background-image:url("data:image/svg+xml;utf8,&lt;svg&gt;…feTurbulence 噪点…&lt;/svg&gt;")}</code></pre>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>最后交付了什么</h2>
+    <p>一个 HTML 文件，扔到任何静态托管（Vercel / 虚拟主机 / 宝塔）都能跑。没有数据库、没有构建步骤、不引外部字体和图片库。</p>
+    <figure>
+      <div class="two">
+        <div class="frame"><img src="assets/preview-desktop.webp" alt="桌面端效果（1400 宽）" loading="lazy"></div>
+        <div class="frame"><img src="assets/preview-mobile.webp" alt="手机端效果（390 宽）" loading="lazy"></div>
+      </div>
+      <figcaption class="cap">左：桌面 1400 宽　右：手机 390 宽。都截自页面顶部，两边都是真实渲染，不是拼的图。</figcaption>
+    </figure>
+    <p style="margin-top:18px">
+      <span class="tag">单页 · 5 个模块</span>
+      <span class="tag">手机适配</span>
+      <span class="tag">表单区</span>
+      <span class="tag">免费改 2 次</span>
+      <span class="tag">源码交付</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>这一档多少钱，还能加什么</h2>
+    <table>
+      <thead><tr><th>档位</th><th>价格</th><th>包含</th></tr></thead>
+      <tbody>
+        <tr><td>基础（就是上面这个）</td><td style="color:var(--neon);font-weight:800">¥399 起</td><td>单页 + 5 个模块 + 手机适配 + 改 2 次</td></tr>
+        <tr><td>标准</td><td style="color:var(--neon);font-weight:800">¥699 起</td><td>单页 + 8 个模块 + 表单对接（能真的收到消息）+ 改 3 次</td></tr>
+        <tr><td>加购</td><td style="color:var(--neon);font-weight:800">每页 +¥200</td><td>多页面、多语言、后台可编辑</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px">本页是<strong>演示项目</strong>，品牌、地址、电话、豆单都是虚构的，用来展示页面结构和技术实现。</p>
+  </section>
+
+  <div class="cta">
+    <a class="btn" href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">小红书私信我聊需求</a>
+    <a class="btn ghost" href="../">← 看其它三个作品</a>
+  </div>
+</div>
+</body>
+</html>
