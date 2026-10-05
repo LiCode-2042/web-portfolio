@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>作品管理后台</title>
+<style>
+:root{--bg:#0D1012;--panel:#171B1E;--ink:#F4F7F1;--dim:#9AA3A8;--line:rgba(255,255,255,.12);--neon:#C6F432;--bad:#FF7A6B;
+  --font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;--mono:ui-monospace,Consolas,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.7}
+a{color:var(--neon)}
+.wrap{max-width:1000px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,4vw,32px) 80px}
+h1{font-size:clamp(22px,3.4vw,30px);font-weight:900;margin-bottom:6px}
+h2{font-size:17px;font-weight:800;margin:0 0 4px}
+.sub{color:var(--dim);font-size:14px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:20px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input,textarea,select{background:#0F1315;border:1px solid var(--line);border-radius:8px;color:var(--ink);
+  font-family:var(--font);font-size:14px;padding:9px 12px;min-height:42px;width:100%}
+input:focus,textarea:focus{outline:none;border-color:var(--neon)}
+label{display:block;font-size:12px;color:var(--dim);margin-bottom:4px}
+button{font-family:var(--font);font-size:14px;font-weight:700;min-height:42px;padding:0 18px;border-radius:999px;
+  border:1px solid transparent;cursor:pointer;background:var(--neon);color:#0D1012}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button.tiny{min-height:34px;padding:0 12px;font-size:13px;background:transparent;color:var(--ink);border-color:var(--line)}
+button:hover{opacity:.88}
+.work{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:12px;background:#141819}
+.grid{display:grid;grid-template-columns:2fr 3fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.tag{font-size:12px;color:var(--dim)}
+.status{margin-top:14px;font-size:14px;color:var(--dim);white-space:pre-wrap;font-family:var(--mono)}
+.status.ok{color:var(--neon)}
+.status.err{color:var(--bad)}
+details{margin-top:12px;font-size:14px;color:var(--dim)}
+summary{cursor:pointer;color:var(--neon);font-weight:700}
+details ol{margin:10px 0 0 20px}
+details li{margin-bottom:6px}
+code{font-family:var(--mono);font-size:12.5px;background:#0F1315;border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.hide{display:none}
+@media (max-width:640px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>作品管理后台</h1>
+  <p class="sub">在这里改作品，保存后直接提交到 GitHub，网站一分钟左右自动更新。<strong>不用碰任何代码。</strong>
+  　<a href="../" target="_blank">先看看现在的网站 →</a></p>
+
+  <div class="box">
+    <h2>① 先设置一次令牌</h2>
+    <p class="sub">令牌只存在<strong>你自己这个浏览器</strong>里（localStorage），不会进仓库、不会发给别人。换台电脑要重新粘一次。</p>
+    <div class="row" style="margin-top:12px">
+      <input id="token" type="password" placeholder="粘 GitHub 令牌（ghp_… 或 github_pat_…）" autocomplete="off" style="flex:1;min-width:260px">
+      <button id="saveToken">保存令牌</button>
+      <button class="ghost" id="clearToken">清除</button>
+    </div>
+    <div id="tokenState" class="status"></div>
+
+    <details>
+      <summary>还没有令牌？点这里看怎么建（一次性，2 分钟）</summary>
+      <ol>
+        <li>浏览器打开 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>（要用你自己的 GitHub 账号登录）</li>
+        <li><strong>Token name</strong> 随便填，比如 <code>portfolio-admin</code></li>
+        <li><strong>Expiration</strong> 建议选 90 天（到期再建一个）</li>
+        <li><strong>Repository access</strong> 选 <strong>Only select repositories</strong>，只勾 <code>web-portfolio</code>（别给全部仓库权限）</li>
+        <li><strong>Permissions → Repository permissions</strong> 找到 <strong>Contents</strong>，改成 <strong>Read and write</strong>；其它都不用动</li>
+        <li>点最下面 <strong>Generate token</strong>，把生成的字符串<strong>整段复制</strong>（离开页面就再也不显示了）</li>
+        <li>粘到上面那个框，点「保存令牌」</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="box">
+    <h2>② 改作品</h2>
+    <p class="sub">改完点最下面的「保存到线上」。上移/下移决定作品在首页的顺序。</p>
+    <div id="works"></div>
+    <div class="actions">
+      <button class="ghost" id="add">+ 加一个作品</button>
+      <button class="ghost" id="reload">从线上重新读取</button>
+      <span class="tag" id="count"></span>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="actions" style="margin-top:0">
+      <button id="save">保存到线上（提交到 GitHub）</button>
+      <span class="tag">提交信息会自动带上时间</span>
+    </div>
+    <div id="status" class="status"></div>
+  </div>
+</div>
+
+<script>
+var OWNER = 'LiCode-2042', REPO = 'web-portfolio', BRANCH = 'main', FILE = 'works.json';
+var $ = function (id) { return document.getElementById(id); };
+var works = [];
+
+function say(msg, cls) {
+  var el = $('status');
+  el.className = 'status' + (cls ? ' ' + cls : '');
+  el.textContent = msg;
+}
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function token() { return localStorage.getItem('gh_token') || ''; }
+
+function render() {
+  $('count').textContent = works.length + ' 个作品';
+  $('works').innerHTML = works.map(function (w, i) {
+    return '<div class="work" data-i="' + i + '">' +
+      '<div class="grid">' +
+        '<div><label>标题</label><input data-k="title" value="' + esc(w.title) + '"></div>' +
+        '<div><label>副标题（一句话说明）</label><input data-k="sub" value="' + esc(w.sub) + '"></div>' +
+      '</div>' +
+      '<div class="grid3">' +
+        '<div><label>链接（点开去哪）</label><input data-k="href" value="' + esc(w.href) + '"></div>' +
+        '<div><label>缩略图路径</label><input data-k="thumb" value="' + esc(w.thumb) + '"></div>' +
+      '</div>' +
+      '<div class="grid3">' +
+        '<div><label>按钮文字</label><input data-k="go" value="' + esc(w.go) + '"></div>' +
+        '<div><label>图片说明（看不见图时显示）</label><input data-k="alt" value="' + esc(w.alt) + '"></div>' +
+      '</div>' +
+      '<div class="actions">' +
+        '<button class="tiny" data-act="up">↑ 上移</button>' +
+        '<button class="tiny" data-act="down">↓ 下移</button>' +
+        '<button class="tiny" data-act="show">' + (w.show === false ? '已隐藏（点它显示）' : '正在显示（点它隐藏）') + '</button>' +
+        '<button class="tiny" data-act="del">删除</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+$('works').addEventListener('input', function (e) {
+  var box = e.target.closest('.work'); if (!box) return;
+  works[+box.dataset.i][e.target.dataset.k] = e.target.value;
+});
+$('works').addEventListener('click', function (e) {
+  var btn = e.target.closest('button[data-act]'); if (!btn) return;
+  var i = +btn.closest('.work').dataset.i, act = btn.dataset.act;
+  if (act === 'up' && i > 0) works.splice(i - 1, 0, works.splice(i, 1)[0]);
+  if (act === 'down' && i < works.length - 1) works.splice(i + 1, 0, works.splice(i, 1)[0]);
+  if (act === 'show') works[i].show = works[i].show === false;
+  if (act === 'del' && confirm('删除「' + works[i].title + '」？保存后网站才会变。')) works.splice(i, 1);
+  render();
+});
+$('add').onclick = function () {
+  works.push({ title: '新作品', sub: '一句话说明', href: '', thumb: '', go: '打开 →', alt: '', show: true });
+  render();
+};
+
+function loadFrom(data, from) {
+  works = (Array.isArray(data) ? data : []).map(function (w) {
+    return { title: w.title || '', sub: w.sub || '', href: w.href || '', thumb: w.thumb || '',
+             go: w.go || '打开 →', alt: w.alt || '', show: w.show !== false };
+  });
+  render();
+  say(works.length + ' 个作品已载入（' + from + '）');
+}
+
+function load() {
+  if (location.protocol === 'file:') {
+    say('现在是用本地文件打开的，浏览器不允许本地文件读取 works.json。\n请用线上地址打开这个后台：licode-2042.github.io/web-portfolio/admin/', 'err');
+    return;
+  }
+  say('正在读取 works.json …');
+  fetch('../works.json?t=' + Date.now())
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j) return loadFrom(j, '本地/线上文件'); throw new Error('本地读不到，试 GitHub'); })
+    .catch(function () {
+      if (!token()) { say('读不到 works.json。先把令牌粘上去，再点「从线上重新读取」。', 'err'); return; }
+      fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE + '?ref=' + BRANCH, {
+        headers: { authorization: 'Bearer ' + token(), accept: 'application/vnd.github+json' }
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (!j.content) throw new Error(j.message || '读取失败');
+        loadFrom(JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\s/g, ''))))), 'GitHub');
+      }).catch(function (e) { say('读取失败：' + e.message, 'err'); });
+    });
+}
+
+function b64utf8(str) {
+  var bytes = new TextEncoder().encode(str), bin = '';
+  for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+$('save').onclick = function () {
+  if (!token()) { say('先粘令牌再保存。', 'err'); return; }
+  var body = JSON.stringify(works.map(function (w) {
+    return { title: w.title, sub: w.sub, href: w.href, thumb: w.thumb, alt: w.alt, go: w.go, show: w.show !== false };
+  }), null, 1);
+
+  say('正在提交 …');
+  var api = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE;
+  fetch(api + '?ref=' + BRANCH, { headers: { authorization: 'Bearer ' + token(), accept: 'application/vnd.github+json' } })
+    .then(function (r) { return r.status === 404 ? {} : r.json(); })
+    .then(function (cur) {
+      var d = new Date();
+      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+      var msg = '后台更新作品列表 ' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+                ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+      return fetch(api, {
+        method: 'PUT',
+        headers: { authorization: 'Bearer ' + token(), accept: 'application/vnd.github+json', 'content-type': 'application/json' },
+        body: JSON.stringify({ message: msg, content: b64utf8(body), branch: BRANCH, sha: cur.sha })
+      });
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (j.content && j.commit) {
+        say('✅ 保存成功！提交 ' + j.commit.sha.slice(0, 7) + '\n网站大约 1 分钟后自动更新。\n' + j.commit.html_url, 'ok');
+      } else {
+        say('❌ 保存失败：' + (j.message || '未知错误') +
+            (j.message === 'Bad credentials' ? '\n令牌不对或过期了，重新建一个。' : ''), 'err');
+      }
+    })
+    .catch(function (e) { say('❌ 保存失败：' + e.message, 'err'); });
+};
+
+$('saveToken').onclick = function () {
+  var t = $('token').value.trim();
+  if (!t) { say('先把令牌粘进框里。', 'err'); return; }
+  localStorage.setItem('gh_token', t);
+  $('token').value = '';
+  showTokenState();
+  say('令牌已存在这个浏览器里。', 'ok');
+};
+$('clearToken').onclick = function () {
+  localStorage.removeItem('gh_token');
+  showTokenState();
+  say('令牌已清除。');
+};
+function showTokenState() {
+  var t = token();
+  $('tokenState').className = 'status ' + (t ? 'ok' : '');
+  $('tokenState').textContent = t ? ('已有令牌（' + t.slice(0, 7) + '…，共 ' + t.length + ' 位）') : '还没有令牌';
+}
+
+$('reload').onclick = load;
+showTokenState();
+load();
+</script>
+</body>
+</html>

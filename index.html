@@ -81,7 +81,7 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
   <h1>四个作品，<br>四种<span class="hl">交付物</span></h1>
   <p class="lede">都是演示项目：品牌与内容均为虚构，用来展示页面结构、响应式和技术实现。点进去可以真操作。</p>
 
-  <div class="list">
+  <div class="list" id="workList">
     <a class="item" href="01-cafe/">
       <div class="thumb"><img src="assets/thumbs/01-cafe.webp" alt="门店单页官网预览" loading="lazy"></div>
       <div class="n">01</div>
@@ -159,6 +159,36 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
     <p class="note small">演示站里的品牌、电话、地址都是虚构的，仅用于展示页面结构。</p>
   </section>
 </div>
+
+<script>
+// 作品列表改成读 works.json —— 用 /admin/ 那个后台改，不用动这个文件。
+// 上面写的 4 个是兜底：万一 works.json 没加载出来（比如离线打开），页面照样是完整的。
+(function () {
+  var box = document.getElementById('workList');
+  if (!box) return;
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  fetch('works.json?t=' + Date.now())
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (list) {
+      if (!Array.isArray(list)) return;
+      var items = list.filter(function (w) { return w && w.show !== false && w.title; });
+      if (!items.length) return;
+      box.innerHTML = items.map(function (w, i) {
+        var n = ('0' + (i + 1)).slice(-2);
+        return '<a class="item" href="' + esc(w.href) + '">' +
+          '<div class="thumb"><img src="' + esc(w.thumb) + '" alt="' + esc(w.alt || w.title) + '" loading="lazy"></div>' +
+          '<div class="n">' + n + '</div>' +
+          '<div><h2>' + esc(w.title) + '</h2><p>' + esc(w.sub || '') + '</p></div>' +
+          '<div class="go">' + esc(w.go || '打开 →') + '</div></a>';
+      }).join('');
+    })
+    .catch(function () { /* 兜底 HTML 还在，什么都不用做 */ });
+})();
+</script>
 
 <script>
 // 鼠标追视：光晕用缓动跟着指针走。触屏设备、开了「减少动态效果」的都不启用。

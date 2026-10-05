@@ -1,0 +1,38 @@
+[
+ {
+  "title": "门店单页官网",
+  "sub": "咖啡店 · 单文件静态页 · 表单与门店信息",
+  "href": "01-cafe/",
+  "thumb": "assets/thumbs/01-cafe.webp",
+  "alt": "门店单页官网预览",
+  "go": "打开 →",
+  "show": true
+ },
+ {
+  "title": "企业官网（5 页）",
+  "sub": "工业设备 · 多页面站点 · 参数表格与案例页",
+  "href": "02-corp/",
+  "thumb": "assets/thumbs/02-corp.webp",
+  "alt": "企业官网预览",
+  "go": "打开 →",
+  "show": true
+ },
+ {
+  "title": "浏览器插件（取色器）",
+  "sub": "Chrome 扩展 · 读取网页配色与字体 · 点这里看界面",
+  "href": "03-plugin/preview.png",
+  "thumb": "assets/thumbs/03-plugin.webp",
+  "alt": "浏览器插件界面",
+  "go": "看界面 →",
+  "show": true
+ },
+ {
+  "title": "微信小程序（课预约）",
+  "sub": "瑜伽馆 · 3 个页面 · 课程表与预约表单",
+  "href": "04-miniprogram/preview.png",
+  "thumb": "assets/thumbs/04-miniprogram.webp",
+  "alt": "微信小程序三屏",
+  "go": "看三屏 →",
+  "show": true
+ }
+]
