@@ -6,6 +6,7 @@
   "thumb": "assets/thumbs/01-cafe.webp",
   "alt": "门店单页官网预览",
   "go": "打开 →",
+  "tag": "单页官网",
   "show": true
  },
  {
@@ -15,6 +16,7 @@
   "thumb": "assets/thumbs/02-corp.webp",
   "alt": "企业官网预览",
   "go": "打开 →",
+  "tag": "多页官网",
   "show": true
  },
  {
@@ -24,6 +26,7 @@
   "thumb": "assets/thumbs/03-plugin.webp",
   "alt": "浏览器插件界面",
   "go": "看界面 →",
+  "tag": "Chrome 扩展",
   "show": true
  },
  {
@@ -33,6 +36,7 @@
   "thumb": "assets/thumbs/04-miniprogram.webp",
   "alt": "微信小程序三屏",
   "go": "看三屏 →",
+  "tag": "微信小程序",
   "show": true
  }
 ]

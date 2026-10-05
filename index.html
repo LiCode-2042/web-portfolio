@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>魏 · 网站与小程序作品集</title>
-<meta name="description" content="四个演示作品：门店单页、企业官网、浏览器插件、微信小程序。">
+<title>魏 · 网站与小程序定制开发（接单中）</title>
+<meta name="description" content="个人接单，做单页官网 / 企业官网 / 小程序。源码交付、手机端适配、上线帮你弄好，报价 ¥399 起。四个作品可以点开真操作。">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="魏 · 网站与小程序定制开发">
@@ -15,162 +15,390 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
-  --bg:#0D1012; --panel:#171B1E; --ink:#F4F7F1; --dim:#9AA3A8; --line:rgba(255,255,255,.12);
-  --neon:#C6F432; --font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  --bg:#0C0F11; --bg2:#0F1315; --panel:#161A1D; --panel2:#1B2022;
+  --ink:#F4F7F1; --dim:#98A2A7; --dim2:#78838A;
+  --line:rgba(255,255,255,.11); --line2:rgba(255,255,255,.07);
+  --neon:#C6F432; --font:"Microsoft YaHei","PingFang SC",system-ui,-apple-system,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 html,body{overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.7;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.75;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(18px,5vw,40px)}
-.grid-bg{position:fixed;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 72px),
-                   repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 72px)}
-.glow{position:fixed;right:-260px;top:-260px;width:720px;height:720px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle at 42% 42%,rgba(198,244,50,.14),transparent 64%)}
-/* 鼠标追视：跟着光标走的柔光。触屏和「减少动态效果」下自动关闭 */
-.cursor-glow{position:fixed;left:0;top:0;width:500px;height:500px;margin:-250px 0 0 -250px;border-radius:50%;
-  pointer-events:none;opacity:0;transition:opacity .5s ease;mix-blend-mode:screen;will-change:transform;
-  background:radial-gradient(circle at 50% 50%,rgba(198,244,50,.55),rgba(198,244,50,.16) 34%,transparent 60%)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.032) 0 1px,transparent 1px 84px),
+                   repeating-linear-gradient(90deg,rgba(255,255,255,.032) 0 1px,transparent 1px 84px)}
+.glow{position:fixed;right:-280px;top:-300px;width:820px;height:820px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 44% 44%,rgba(198,244,50,.13),transparent 64%)}
+.cursor-glow{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;
+  pointer-events:none;z-index:1;opacity:0;transition:opacity .5s ease;mix-blend-mode:screen;will-change:transform;
+  background:radial-gradient(circle at 50% 50%,rgba(198,244,50,.40),rgba(198,244,50,.13) 38%,transparent 64%)}
 .cursor-glow.on{opacity:1}
-.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--neon);text-transform:uppercase}
-.badge{display:inline-block;margin-left:10px;padding:3px 10px;border-radius:999px;
-  background:var(--neon);color:#0b0f16;font-size:11px;font-weight:700;letter-spacing:.04em}
-h1{font-size:clamp(28px,5vw,46px);line-height:1.2;font-weight:900;letter-spacing:-.01em;margin:12px 0 14px;overflow-wrap:anywhere}
-h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6px}
-.lede{color:var(--dim);font-size:16px;max-width:52ch}
-.list{display:grid;gap:14px;margin:38px 0 10px}
-.item{display:grid;grid-template-columns:170px 56px minmax(0,1fr) auto;gap:16px;align-items:center;
-  background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;text-decoration:none;transition:.18s}
-.item .thumb{width:170px;height:118px;border-radius:8px;overflow:hidden;background:#0e1420;border:1px solid var(--line)}
-.item .thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.item:hover{border-color:var(--neon);transform:translateY(-2px)}
-.item .n{font-size:20px;font-weight:900;color:var(--neon)}
-.item h2{font-size:19px;font-weight:800;margin-bottom:4px}
-.item p{font-size:14px;color:var(--dim)}
-.item .go{font-size:14px;font-weight:700;color:var(--neon);white-space:nowrap}
-.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;
-  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.block{margin-top:54px;padding-top:32px;border-top:1px solid var(--line)}
-.h2{font-size:clamp(20px,3vw,26px);font-weight:800;margin-bottom:10px}
-.note{color:var(--dim);font-size:14px;margin-bottom:16px}
-.note.small{font-size:12px;margin:16px 0 0}
-.price{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.price th,.price td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
-.price th{color:var(--dim);font-weight:700;font-size:13px;letter-spacing:.04em;background:rgba(255,255,255,.03)}
+.page{position:relative;z-index:2}
+
+/* 顶栏 */
+header{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);
+  background:rgba(12,15,17,.82);border-bottom:1px solid var(--line2)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0}
+.brand{font-weight:900;letter-spacing:.01em;font-size:16px;display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand i{width:10px;height:10px;border-radius:3px;background:var(--neon);display:block}
+.nav{display:flex;gap:24px;font-size:14.5px}
+.nav a{text-decoration:none;color:var(--dim);transition:.18s}
+.nav a:hover{color:var(--neon)}
+.bar .btn{min-height:40px;padding:0 18px;font-size:14px}
+
+/* 首屏 */
+.hero{padding:clamp(56px,9vw,118px) 0 clamp(40px,6vw,72px)}
+.eyebrow{font-size:12.5px;letter-spacing:.2em;color:var(--neon);text-transform:uppercase;font-weight:700}
+.badge{display:inline-block;margin-left:10px;padding:3px 11px;border-radius:999px;background:var(--neon);
+  color:#0B0F10;font-size:11px;font-weight:900;letter-spacing:.02em}
+h1{font-size:clamp(32px,5.6vw,62px);line-height:1.14;font-weight:900;letter-spacing:-.02em;
+  margin:20px 0 20px;overflow-wrap:anywhere;max-width:22ch}
+h1 .hl{background:var(--neon);color:#0C0F11;padding:2px 14px 7px;border-radius:8px;display:inline-block}
+.lede{color:var(--dim);font-size:clamp(15px,1.7vw,17.5px);max-width:46ch;line-height:1.8}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:clamp(38px,5vw,56px);
+  border-top:1px solid var(--line2);padding-top:26px}
+.stats div b{display:block;font-size:clamp(20px,2.6vw,27px);font-weight:900;color:var(--neon);letter-spacing:-.01em}
+.stats div span{font-size:13.5px;color:var(--dim2)}
+
+/* 通用小节 */
+section{padding:clamp(56px,8vw,104px) 0 0}
+.h2{font-size:clamp(22px,3.2vw,32px);font-weight:900;line-height:1.28;letter-spacing:-.015em;margin-bottom:14px}
+.h2::before{content:"";display:block;width:36px;height:3px;border-radius:2px;background:var(--neon);margin-bottom:18px}
+.note{color:var(--dim);font-size:15.5px;max-width:58ch;line-height:1.8}
+.note.small{font-size:12.5px;color:var(--dim2);margin-top:22px}
+.sec-head{margin-bottom:clamp(28px,4vw,44px)}
+
+/* 服务三档 */
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.svc .c{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px;
+  display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.svc .c:hover{border-color:rgba(198,244,50,.55);transform:translateY(-3px)}
+.svc .c .k{font-size:12.5px;color:var(--dim2);letter-spacing:.16em;font-weight:800}
+.svc .c h3{font-size:20px;font-weight:900;margin:10px 0 8px}
+.svc .c .price{font-size:24px;font-weight:900;color:var(--neon);letter-spacing:-.01em;margin-bottom:12px}
+.svc .c p{font-size:14px;color:var(--dim);line-height:1.7;flex:1}
+.svc .c .who{margin-top:14px;padding-top:14px;border-top:1px solid var(--line2);font-size:13px;color:var(--dim2)}
+
+/* 作品 */
+.list{display:grid;gap:18px}
+.item{display:grid;grid-template-columns:210px 1fr auto;gap:24px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 26px;text-decoration:none;
+  transition:border-color .2s,transform .2s,box-shadow .25s}
+.item:hover{border-color:var(--neon);transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(198,244,50,.6)}
+.item .thumb{width:210px;height:142px;border-radius:10px;overflow:hidden;background:#0d1319;border:1px solid var(--line)}
+.item .thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.item:hover .thumb img{transform:scale(1.05)}
+.item .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--neon);
+  border:1px solid rgba(198,244,50,.45);border-radius:999px;padding:3px 11px;margin-bottom:10px}
+.item h3{font-size:20px;font-weight:900;margin-bottom:7px;letter-spacing:-.01em}
+.item p{font-size:14px;color:var(--dim);line-height:1.7}
+.item .go{font-size:14px;font-weight:800;color:var(--neon);white-space:nowrap}
+
+/* 案例 */
+.case{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,52px);align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,4vw,40px)}
+.case .k{font-size:12.5px;letter-spacing:.18em;color:var(--neon);font-weight:800}
+.case h3{font-size:clamp(20px,2.8vw,28px);font-weight:900;line-height:1.3;margin:12px 0 12px;letter-spacing:-.015em}
+.case p{color:var(--dim);font-size:14.5px;line-height:1.8}
+.case ul{list-style:none;margin-top:18px;display:grid;gap:9px}
+.case li{font-size:14px;color:#CBD3CC;display:flex;gap:10px}
+.case li::before{content:"→";color:var(--neon);font-weight:800;flex:none}
+.case .shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0d1319}
+.case .shot img{width:100%;display:block}
+.case .btn{margin-top:22px}
+
+/* 报价 + 流程 */
+.duo{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,4vw,54px);align-items:start}
+.duo h3{font-size:16px;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:9px;color:#DFE6DA}
+.duo h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--neon);flex:none}
+.price{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden}
+.price th,.price td{padding:15px 17px;text-align:left;border-bottom:1px solid var(--line)}
+.price th{color:var(--dim2);font-weight:700;font-size:12.5px;letter-spacing:.05em;background:rgba(255,255,255,.03)}
 .price tr:last-child td{border-bottom:0}
-.price .p{color:var(--neon);font-weight:800;white-space:nowrap}
-.steps{list-style:none;counter-reset:s;display:grid;gap:12px}
-.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:10px;
-  padding:16px 18px 16px 56px;position:relative}
-.steps li::before{content:"0" counter(s);position:absolute;left:18px;top:17px;color:var(--neon);font-weight:800;font-size:13px}
-.steps b{display:block;font-size:16px;margin-bottom:4px}
-.steps span{color:var(--dim);font-size:14px;line-height:1.6}
-.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.lk{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--panel);
-  border:1px solid var(--line);border-radius:10px;padding:18px 20px;text-decoration:none;transition:.18s}
-.lk:hover{border-color:var(--neon);transform:translateY(-2px)}
-.lk b{font-size:15px}
-.lk span{color:var(--neon);font-size:13px;white-space:nowrap}
+.price .p{color:var(--neon);font-weight:900;font-size:17px;white-space:nowrap}
+.steps{list-style:none;counter-reset:s;display:grid;gap:14px}
+.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:19px 21px 19px 62px;position:relative}
+.steps li::before{content:"0" counter(s);position:absolute;left:21px;top:20px;color:var(--neon);font-weight:900;font-size:13px}
+.steps b{display:block;font-size:16px;margin-bottom:5px}
+.steps span{color:var(--dim);font-size:13.5px;line-height:1.7}
+
+/* 常见问题 */
+.faq{display:grid;gap:12px;max-width:760px}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0 20px;transition:.2s}
+.faq details[open]{border-color:rgba(198,244,50,.45)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-size:16px;font-weight:800;display:flex;
+  justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--neon);font-size:20px;font-weight:900;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--dim);font-size:14.5px;line-height:1.8;padding:0 0 20px}
+
+/* 底部 CTA + 页脚 */
+.cta-card{border:1px solid rgba(198,244,50,.4);border-radius:22px;
+  background:linear-gradient(135deg,rgba(198,244,50,.10),rgba(22,26,29,.8));
+  padding:clamp(26px,4vw,44px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center}
+.cta-card h3{font-size:clamp(20px,2.8vw,27px);font-weight:900;margin-bottom:10px;letter-spacing:-.015em}
+.cta-card p{color:var(--dim);font-size:14.5px;line-height:1.8;max-width:46ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;
+  font-size:15px;font-weight:900;text-decoration:none;background:var(--neon);color:#0C0F11;white-space:nowrap;transition:.2s}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{opacity:.88;transform:translateY(-1px)}
+footer{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line);padding:38px 0 46px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px;font-size:14px;color:var(--dim)}
+footer h4{font-size:14px;color:var(--ink);font-weight:900;margin-bottom:10px}
+footer ul{list-style:none;display:grid;gap:7px}
+footer a{color:var(--dim);text-decoration:none}
+footer a:hover{color:var(--neon)}
+.fbase{margin-top:30px;padding-top:18px;border-top:1px solid var(--line2);font-size:12.5px;color:var(--dim2);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+@media (max-width:880px){
+  .nav{display:none}
+  .svc{grid-template-columns:minmax(0,1fr)}
+  .duo{grid-template-columns:minmax(0,1fr)}
+  .case{grid-template-columns:minmax(0,1fr)}
+  .cta-card{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+}
 @media (max-width:640px){
-  .item{grid-template-columns:minmax(0,1fr);gap:8px}
-  .item .thumb{width:100%;height:170px}
-  .item .n{font-size:14px;letter-spacing:.16em}
+  .item{grid-template-columns:minmax(0,1fr);gap:12px;padding:20px}
+  .item .thumb{width:100%;height:186px}
   .item .go{justify-self:start}
-  .links{grid-template-columns:minmax(0,1fr)}
   .price th:nth-child(3),.price td:nth-child(3){display:none}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
 <body>
 <div class="grid-bg"></div><div class="glow"></div><div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="page">
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="./"><i></i>魏 · 网站与小程序定制</a>
+    <nav class="nav">
+      <a href="#service">能做什么</a>
+      <a href="#works">作品</a>
+      <a href="#case">案例拆解</a>
+      <a href="#price">报价</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a class="btn" href="#contact">私信聊需求</a>
+  </div>
+</header>
+
 <div class="wrap">
-  <p class="eyebrow">Web &amp; Mini Program <span class="badge">接单中</span></p>
-  <h1>四个作品，<br>四种<span class="hl">交付物</span></h1>
-  <p class="lede">都是演示项目：品牌与内容均为虚构，用来展示页面结构、响应式和技术实现。点进去可以真操作。</p>
-
-  <div class="list" id="workList">
-    <a class="item" href="01-cafe/">
-      <div class="thumb"><img src="assets/thumbs/01-cafe.webp" alt="门店单页官网预览" loading="lazy"></div>
-      <div class="n">01</div>
-      <div><h2>门店单页官网</h2><p>咖啡店 · 单文件静态页 · 表单与门店信息</p></div>
-      <div class="go">打开 →</div>
-    </a>
-    <a class="item" href="02-corp/">
-      <div class="thumb"><img src="assets/thumbs/02-corp.webp" alt="企业官网预览" loading="lazy"></div>
-      <div class="n">02</div>
-      <div><h2>企业官网（5 页）</h2><p>工业设备 · 多页面站点 · 参数表格与案例页</p></div>
-      <div class="go">打开 →</div>
-    </a>
-    <a class="item" href="03-plugin/preview.png">
-      <div class="thumb"><img src="assets/thumbs/03-plugin.webp" alt="浏览器插件界面" loading="lazy"></div>
-      <div class="n">03</div>
-      <div><h2>浏览器插件（取色器）</h2><p>Chrome 扩展 · 读取网页配色与字体 · 点这里看界面</p></div>
-      <div class="go">看界面 →</div>
-    </a>
-    <a class="item" href="04-miniprogram/preview.png">
-      <div class="thumb"><img src="assets/thumbs/04-miniprogram.webp" alt="微信小程序三屏" loading="lazy"></div>
-      <div class="n">04</div>
-      <div><h2>微信小程序（课预约）</h2><p>瑜伽馆 · 3 个页面 · 课程表与预约表单</p></div>
-      <div class="go">看三屏 →</div>
-    </a>
+  <div class="hero">
+    <p class="eyebrow">独立开发 · 个人接单 <span class="badge">接单中</span></p>
+    <h1>把想法做成<br>能点开、能用的<span class="hl">网站</span></h1>
+    <p class="lede">单页官网 / 企业官网 / 小程序。不套模板、不是外包转手：沟通直接，源码交付，手机端适配，上线我帮你弄好。</p>
+    <div class="hero-cta">
+      <a class="btn" href="#works">看四个作品</a>
+      <a class="btn ghost" href="case-01/">看一个完整拆解</a>
+    </div>
+    <div class="stats">
+      <div><b>4 个</b><span>能点开真操作的演示</span></div>
+      <div><b>3 档</b><span>单页 / 官网 / 小程序</span></div>
+      <div><b>¥399 起</b><span>含源码与手机适配</span></div>
+      <div><b>2–3 次</b><span>免费修改，先看方案再决定</span></div>
+    </div>
   </div>
 
-  <div class="foot">
-    <span>需要类似的网站 / 小程序，<a href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">点我小红书主页私信</a>聊需求</span>
-    <span>演示内容均为虚构</span>
-  </div>
-
-  <section class="block">
-    <h2 class="h2">案例拆解</h2>
-    <p class="note">挑了一个作品，把过程完整拆开写：客户要什么 → 设计上做了什么决定 → 关键代码 → 最后交付什么。报价怎么来的，看这个最清楚。</p>
-    <div class="links" style="grid-template-columns:minmax(0,1fr)">
-      <a class="lk" href="case-01/">
-        <b>案例 01 · 咖啡店单页官网（¥399 档）</b><span>看完整拆解 →</span></a>
+  <section id="service">
+    <div class="sec-head">
+      <h2 class="h2">能做什么</h2>
+      <p class="note">最常接的三类。看完还是不确定要哪种，把需求发我，我帮你选，免费。</p>
+    </div>
+    <div class="svc">
+      <div class="c">
+        <span class="k">01</span>
+        <h3>单页官网 / 落地页</h3>
+        <div class="price">¥399 起</div>
+        <p>一个页面讲清一件事：8 个模块以内，手机端单独排过版，表单能真的收到消息。</p>
+        <div class="who">适合：门店、工作室、活动页、个人主页</div>
+      </div>
+      <div class="c">
+        <span class="k">02</span>
+        <h3>企业官网（多页）</h3>
+        <div class="price">¥1280 起</div>
+        <p>首页 + 产品 + 案例 + 关于 + 联系，5 页以内。参数表格、案例展示、询价表单都做。</p>
+        <div class="who">适合：工厂、设备、工程、服务类公司</div>
+      </div>
+      <div class="c">
+        <span class="k">03</span>
+        <h3>微信小程序</h3>
+        <div class="price">¥2480 起</div>
+        <p>展示、预约、表单类，3–5 个页面。协助提交审核、上线，源码交付。</p>
+        <div class="who">适合：到店预约、课程表、报名类生意</div>
+      </div>
     </div>
   </section>
 
-  <section class="block">
-    <h2 class="h2">报价参考</h2>
-    <p class="note">先看需求再报价，下面是最常见的三档。报价逐项列，没有隐藏费用。</p>
-    <table class="price">
-      <thead><tr><th>交付物</th><th>价格</th><th>包含什么</th></tr></thead>
-      <tbody>
-        <tr><td>单页官网</td><td class="p">¥399 起</td><td>8 个模块以内、手机适配、改 2 次</td></tr>
-        <tr><td>企业官网（多页）</td><td class="p">¥1280 起</td><td>5 页以内、产品/案例/联系页、表单对接、改 3 次</td></tr>
-        <tr><td>微信小程序</td><td class="p">¥2480 起</td><td>3–5 个页面、表单/预约、手机适配</td></tr>
-        <tr><td>加购项</td><td class="p">另议</td><td>多语言、后台可编辑、数据接口、长期维护</td></tr>
-      </tbody>
-    </table>
-    <p class="note">报价含源码，交付后 7 天内免费答疑；上线（域名/托管/备案）我可以远程指导。</p>
-  </section>
-
-  <section class="block">
-    <h2 class="h2">怎么合作</h2>
-    <ol class="steps">
-      <li><b>聊需求</b><span>把参考站和想要的功能发我，免费。不清楚的地方我会问。</span></li>
-      <li><b>报价 + 排期</b><span>逐项列清单和价格，告诉你大概几天。不满意可以直接说不做。</span></li>
-      <li><b>定金开工</b><span>通常先付一半。做的过程中能看到进度，不是等到最后才知道。</span></li>
-      <li><b>交付 + 尾款</b><span>源码给你，附改动说明；尾款结清后 7 天内答疑。</span></li>
-    </ol>
-  </section>
-
-  <section class="block contact">
-    <h2 class="h2">想聊需求</h2>
-    <p class="note">我在小红书上更新做图和做站的过程，私信我能最快找到我。</p>
-    <div class="links">
-      <a class="lk" href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">
-        <b>小红书 · @Goildden.Tea</b><span>私信聊需求 →</span></a>
-      <a class="lk" href="https://github.com/LiCode-2042/web-portfolio" target="_blank" rel="noopener">
-        <b>GitHub · 这个作品集</b><span>看源码 →</span></a>
+  <section id="works">
+    <div class="sec-head">
+      <h2 class="h2">四个作品，都能点开真操作</h2>
+      <p class="note">都是演示项目：品牌、地址、电话均为虚构，用来展示页面结构、响应式和技术实现。不是截图，是真的能点。</p>
     </div>
-    <p class="note small">演示站里的品牌、电话、地址都是虚构的，仅用于展示页面结构。</p>
+    <div class="list" id="workList">
+      <a class="item" href="01-cafe/">
+        <div class="thumb"><img src="assets/thumbs/01-cafe.webp" alt="门店单页官网预览" loading="lazy"></div>
+        <div><span class="tag">单页官网</span><h3>门店单页官网</h3><p>咖啡店 · 单文件静态页 · 表单与门店信息</p></div>
+        <div class="go">打开 →</div>
+      </a>
+      <a class="item" href="02-corp/">
+        <div class="thumb"><img src="assets/thumbs/02-corp.webp" alt="企业官网预览" loading="lazy"></div>
+        <div><span class="tag">多页官网</span><h3>企业官网（5 页）</h3><p>工业设备 · 多页面站点 · 参数表格与案例页</p></div>
+        <div class="go">打开 →</div>
+      </a>
+      <a class="item" href="03-plugin/preview.png">
+        <div class="thumb"><img src="assets/thumbs/03-plugin.webp" alt="浏览器插件界面" loading="lazy"></div>
+        <div><span class="tag">Chrome 扩展</span><h3>浏览器插件（取色器）</h3><p>读取网页配色与字体 · 点这里看界面</p></div>
+        <div class="go">看界面 →</div>
+      </a>
+      <a class="item" href="04-miniprogram/preview.png">
+        <div class="thumb"><img src="assets/thumbs/04-miniprogram.webp" alt="微信小程序三屏" loading="lazy"></div>
+        <div><span class="tag">微信小程序</span><h3>微信小程序（课预约）</h3><p>瑜伽馆 · 3 个页面 · 课程表与预约表单</p></div>
+        <div class="go">看三屏 →</div>
+      </a>
+    </div>
   </section>
+
+  <section id="case">
+    <div class="case">
+      <div>
+        <p class="k">CASE STUDY 01</p>
+        <h3>一个 ¥399 的单页，<br>是怎么做出来的</h3>
+        <p>客户只说了三句话：一页就够、手机上要好看、客人能预约。我把过程完整写下来了——</p>
+        <ul>
+          <li>客户原话怎么翻译成需求</li>
+          <li>设计上做了哪三个决定，以及为什么不那样做</li>
+          <li>关键代码（换配色只改 4 行、错落卡片怎么不溢出）</li>
+          <li>最后交付了什么、这一档为什么是 ¥399</li>
+        </ul>
+        <a class="btn" href="case-01/">看完整拆解 →</a>
+      </div>
+      <div class="shot"><img src="assets/case-preview.png" alt="案例页预览（咖啡店单页官网的拆解）" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="sec-head">
+      <h2 class="h2">报价与流程</h2>
+      <p class="note">先看需求再报价，下面是最常见的三档。报价逐项列，没有隐藏费用。</p>
+    </div>
+    <div class="duo">
+      <div>
+        <h3>三档报价</h3>
+        <table class="price">
+          <thead><tr><th>交付物</th><th>价格</th><th>包含什么</th></tr></thead>
+          <tbody>
+            <tr><td>单页官网</td><td class="p">¥399 起</td><td>8 个模块以内、手机适配、改 2 次</td></tr>
+            <tr><td>企业官网（多页）</td><td class="p">¥1280 起</td><td>5 页以内、产品/案例/联系页、表单对接、改 3 次</td></tr>
+            <tr><td>微信小程序</td><td class="p">¥2480 起</td><td>3–5 个页面、表单/预约、手机适配</td></tr>
+            <tr><td>加购项</td><td class="p">另议</td><td>后台可编辑、多语言、多门店、长期维护</td></tr>
+          </tbody>
+        </table>
+        <p class="note small">报价含源码，交付后 7 天内免费答疑；上线（域名 / 托管 / 备案）我可以远程指导或者帮你弄好。</p>
+      </div>
+      <div>
+        <h3>怎么开始</h3>
+        <ol class="steps">
+          <li><b>聊需求</b><span>把参考站和想要的功能发我，免费。不清楚的地方我会问。</span></li>
+          <li><b>报价 + 排期</b><span>逐项列清单和价格，告诉你大概几天。不合适直接说不做。</span></li>
+          <li><b>定金开工</b><span>先付三成。做的过程中随时能看到进度，不是等到最后才知道。</span></li>
+          <li><b>交付 + 尾款</b><span>源码和部署权限都给你，附改动说明；尾款结清后 7 天内答疑。</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="sec-head">
+      <h2 class="h2">常见问题</h2>
+      <p class="note">问得最多的几条，直接写在这儿，省得你还要问一遍。</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>多久能做好？</summary>
+        <p>单页官网 3–5 天，企业官网（多页）5–10 天，小程序 10–15 天。加急的话工期砍一半，价格 +30%。</p>
+      </details>
+      <details>
+        <summary>源码给我吗？</summary>
+        <p>给。尾款结清后，代码、部署账号权限都交给你，以后想换人维护也不受制于我。</p>
+      </details>
+      <details>
+        <summary>做完我自己能改内容吗？</summary>
+        <p>可以。加一个后台（+¥500 起），改文字、换图、调顺序，你登录就能改，不用找我、也不用懂代码。</p>
+      </details>
+      <details>
+        <summary>先付多少钱？</summary>
+        <p>先付三成定金开工，验收满意再结尾款。超过 ¥1000 的单子可以分三期。</p>
+      </details>
+      <details>
+        <summary>不满意怎么办？</summary>
+        <p>开工前我先给方案和排期，不满意方案可以不做，不收钱。开工后免费改 2–3 次，超出按 ¥50/次。</p>
+      </details>
+      <details>
+        <summary>手机上看会不会乱？</summary>
+        <p>不会。每个站我都按 320 / 390 / 768 / 1440 四档宽度排过版，手机端是单独排的，不是把桌面版缩小。</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta-card">
+      <div>
+        <h3>把参考网站和想要的功能发我</h3>
+        <p>免费聊，不合适直接说不做。我会告诉你大概几天、多少钱、要准备什么。</p>
+      </div>
+      <div class="btns">
+        <a class="btn" href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">小红书私信我</a>
+        <a class="btn ghost" href="case-01/">先看案例拆解</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fgrid">
+      <div>
+        <h4>魏 · 网站与小程序定制</h4>
+        <p style="font-size:13.5px">独立开发，个人接单。做单页官网、企业官网、小程序；源码交付，手机端适配，上线帮你弄好。</p>
+      </div>
+      <div>
+        <h4>快速跳转</h4>
+        <ul>
+          <li><a href="#service">能做什么</a></li>
+          <li><a href="#works">四个作品</a></li>
+          <li><a href="case-01/">案例拆解 01</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>看更多</h4>
+        <ul>
+          <li><a href="https://github.com/LiCode-2042/web-portfolio" target="_blank" rel="noopener">GitHub · 这个作品集</a></li>
+          <li><a href="https://www.xiaohongshu.com/user/profile/6476e8b30000000010036e85" target="_blank" rel="noopener">小红书 · @Goildden.Tea</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbase">
+      <span>© 2026 魏 · 作品集</span>
+      <span>演示站里的品牌、电话、地址均为虚构，仅用于展示页面结构</span>
+    </div>
+  </footer>
+</div>
 </div>
 
 <script>
-// 作品列表改成读 works.json —— 用 /admin/ 那个后台改，不用动这个文件。
-// 上面写的 4 个是兜底：万一 works.json 没加载出来（比如离线打开），页面照样是完整的。
+// 作品列表读 works.json —— 用 /admin/ 后台改就行，不用动这个文件。
+// 上面写死的 4 个是兜底：万一 works.json 没加载出来，页面照样完整。
 (function () {
   var box = document.getElementById('workList');
   if (!box) return;
@@ -185,51 +413,40 @@ h1 .hl{background:var(--neon);color:#0D1012;padding:2px 12px 5px;border-radius:6
       if (!Array.isArray(list)) return;
       var items = list.filter(function (w) { return w && w.show !== false && w.title; });
       if (!items.length) return;
-      box.innerHTML = items.map(function (w, i) {
-        var n = ('0' + (i + 1)).slice(-2);
+      box.innerHTML = items.map(function (w) {
         return '<a class="item" href="' + esc(w.href) + '">' +
           '<div class="thumb"><img src="' + esc(w.thumb) + '" alt="' + esc(w.alt || w.title) + '" loading="lazy"></div>' +
-          '<div class="n">' + n + '</div>' +
-          '<div><h2>' + esc(w.title) + '</h2><p>' + esc(w.sub || '') + '</p></div>' +
+          '<div>' + (w.tag ? '<span class="tag">' + esc(w.tag) + '</span>' : '') +
+            '<h3>' + esc(w.title) + '</h3><p>' + esc(w.sub || '') + '</p></div>' +
           '<div class="go">' + esc(w.go || '打开 →') + '</div></a>';
       }).join('');
     })
-    .catch(function () { /* 兜底 HTML 还在，什么都不用做 */ });
+    .catch(function () { /* 兜底 HTML 还在 */ });
 })();
 </script>
 
 <script>
-// 鼠标追视：光晕用缓动跟着指针走。触屏设备、开了「减少动态效果」的都不启用。
+// 鼠标追视：光晕用缓动跟着指针走。触屏和「减少动态效果」下自动关闭。
 (function () {
   var el = document.getElementById('cursorGlow');
   if (!el) return;
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   var calm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   if (!fine || calm) return;
-
-  var tx = window.innerWidth / 2, ty = window.innerHeight * 0.35; // 目标点
-  var cx = tx, cy = ty;                                          // 当前点（缓动后）
-  var raf = 0;
-
+  var tx = window.innerWidth / 2, ty = window.innerHeight * 0.35;
+  var cx = tx, cy = ty, raf = 0;
   function tick() {
     cx += (tx - cx) * 0.12;
     cy += (ty - cy) * 0.12;
     el.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
-    if (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) {
-      raf = requestAnimationFrame(tick);
-    } else {
-      raf = 0;
-    }
+    raf = (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) ? requestAnimationFrame(tick) : 0;
   }
-
   window.addEventListener('pointermove', function (e) {
     if (e.pointerType && e.pointerType !== 'mouse') return;
-    tx = e.clientX;
-    ty = e.clientY;
+    tx = e.clientX; ty = e.clientY;
     el.classList.add('on');
     if (!raf) raf = requestAnimationFrame(tick);
   }, { passive: true });
-
   document.addEventListener('mouseleave', function () { el.classList.remove('on'); });
   window.addEventListener('blur', function () { el.classList.remove('on'); });
 })();
