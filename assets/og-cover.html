@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8">
+<style>
+:root{--bg:#0D1012;--ink:#F4F7F1;--dim:#9AA3A8;--neon:#C6F432;--line:rgba(255,255,255,.12);
+  --font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;background:var(--bg);color:var(--ink);font-family:var(--font);overflow:hidden}
+.grid{position:absolute;inset:0;background-image:
+  repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 70px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 70px)}
+.glow{position:absolute;right:-220px;top:-260px;width:760px;height:760px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,rgba(198,244,50,.14),transparent 64%)}
+.wrap{position:relative;height:100%;padding:52px 60px;display:flex;flex-direction:column}
+.eyebrow{font-size:19px;letter-spacing:.2em;color:var(--neon);text-transform:uppercase;font-weight:700}
+h1{font-size:62px;line-height:1.12;font-weight:900;margin:16px 0 14px}
+h1 .hl{background:var(--neon);color:#0D1012;padding:0 12px 6px;border-radius:8px}
+.lede{font-size:22px;color:var(--dim);font-weight:600;max-width:60ch}
+.row{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:#171B1E;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.thumb{height:132px;background-size:cover;background-position:top center;background-color:#0e1420}
+.cap{padding:10px 12px;font-size:15px;font-weight:700;color:#DCE3DA}
+.cap span{display:block;font-size:12.5px;color:var(--dim);font-weight:400;margin-top:3px}
+.foot{margin-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:19px;color:var(--dim)}
+.foot b{color:var(--ink)}
+.price{background:var(--neon);color:#0D1012;font-weight:900;padding:6px 18px;border-radius:999px;font-size:21px}
+</style>
+</head>
+<body>
+<div class="grid"></div><div class="glow"></div>
+<div class="wrap">
+  <p class="eyebrow">Web &amp; Mini Program</p>
+  <h1>网站 / 小程序<span class="hl">定制开发</span></h1>
+  <p class="lede">个人接单 · 独立设计 + 开发 · 四个作品可以点开真操作 · 报价 ¥399 起</p>
+  <div class="row">
+    <div class="card"><div class="thumb" style="background-image:url('thumbs/01-cafe.webp')"></div><div class="cap">门店单页官网<span>咖啡店 · 表单与门店信息</span></div></div>
+    <div class="card"><div class="thumb" style="background-image:url('thumbs/02-corp.webp')"></div><div class="cap">企业官网 5 页<span>参数表格与案例页</span></div></div>
+    <div class="card"><div class="thumb" style="background-image:url('thumbs/03-plugin.webp')"></div><div class="cap">浏览器插件<span>读取网页配色与字体</span></div></div>
+    <div class="card"><div class="thumb" style="background-image:url('thumbs/04-miniprogram.webp')"></div><div class="cap">微信小程序<span>课程表与预约表单</span></div></div>
+  </div>
+  <div class="foot">
+    <span>案例可点开真操作：<b>licode-2042.github.io/web-portfolio</b></span>
+    <span class="price">¥399 起</span>
+  </div>
+</div>
+</body>
+</html>
